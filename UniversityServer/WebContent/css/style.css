@@ -1,0 +1,53 @@
+
+.span12{
+	background: white;
+	color: white;
+	padding: 20px 0;
+	text-align: left;
+	
+}
+
+.span6{
+	background: blue;
+	color: white;
+	padding: 20px 0;
+	text-align: center;
+	margin-top: 15px;
+	
+}
+
+.span3{
+	background: purple;
+	color: white;
+	padding: 20px 0;
+	text-align: center;
+	margin-top: 15px;
+	
+}
+
+.span4{
+	background: white;
+	color: black;
+	padding: 20px 0;
+	text-align: left;
+	margin-top: 15px;
+	
+}
+
+.span5, .span7{
+	background: yellow;
+	color: black;
+	padding: 20px 0;
+	text-align: center;
+	margin-top: 15px;
+	
+}
+
+.span6 .span6{
+	background: black;
+	color: white;
+	padding: 20px 0;
+	text-align: center;
+	margin-top: 15px;
+	
+}
