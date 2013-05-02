@@ -3,6 +3,7 @@ package edu.cmpe273.univserver.service;
 import javax.jws.WebService;
 
 import edu.cmpe273.univserver.beans.Course;
+import edu.cmpe273.univserver.beans.InstructorCourse;
 import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.beans.StudentCourse;
 
@@ -24,7 +25,7 @@ public class UniversityServerService {
 		return "";
 	}
 
-	public Course searchCourse(String category, String input) {
+	public Course searchAllCourses(String category, String input) {
 		Course course = new Course();
 		return course;
 	}
@@ -50,9 +51,7 @@ public class UniversityServerService {
 
 	public StudentCourse[] viewRegisteredCourse(String sjsuid) {
 		StudentCourse[] studentCourse = null;
-		;
 		return studentCourse;
-
 	}
 
 	public String addCourseToCart(StudentCourse[] studentCourse) {
@@ -124,4 +123,11 @@ public class UniversityServerService {
 
 		return "";
 	}
+
+	public InstructorCourse[] viewAssignedCourses(String sjsuid) {
+		InstructorCourse[] instructorCourses = null;
+
+		return instructorCourses;
+	}
+
 }
