@@ -11,7 +11,7 @@ import edu.cmpe273.univserver.beans.StudentCourse;
 public class UniversityServerService {
 
 	public String testService() {
-		return "Service Is Available";
+		return "Server Is Available";
 	}
 
 	public Person signIn(String username, String password) {
