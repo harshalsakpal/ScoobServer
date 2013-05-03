@@ -17,7 +17,7 @@ public class UniversityServerService {
 
 	public Person signIn(String username, String password) 
 	{
-		Person person = new Person();
+		Person person = null;
 
 		return person;
 	}
