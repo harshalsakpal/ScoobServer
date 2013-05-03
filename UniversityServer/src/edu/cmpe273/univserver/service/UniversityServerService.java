@@ -6,6 +6,7 @@ import edu.cmpe273.univserver.beans.Course;
 import edu.cmpe273.univserver.beans.InstructorCourse;
 import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.beans.StudentCourse;
+import edu.cmpe273.uniserver.connection.*;
 
 @WebService
 public class UniversityServerService {
@@ -40,20 +41,21 @@ public class UniversityServerService {
 
 	public String addCourse(StudentCourse[] studentCourse) 
 	{
-		
+		//DatabaseConnection db = null;
 		return "";
 
 	}
 
-	public String dropCourse(StudentCourse[] studentCourse) {
-
+	public String dropCourse(StudentCourse[] studentCourse) 
+	{
+		
 		return "";
 
 	}
 
 	public StudentCourse[] viewRegisteredCourse(String sjsuid) 
 	{
-		StudentCourse[] studentCourse = null;
+		StudentCourse[] studentCourse = Coursedao;
 		return studentCourse;
 	}
 
