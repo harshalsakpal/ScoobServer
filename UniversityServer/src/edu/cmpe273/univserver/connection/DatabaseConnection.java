@@ -1,5 +1,5 @@
-package edu.cmpe273.univserver.connection;
 
+package edu.cmpe273.univserver.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
