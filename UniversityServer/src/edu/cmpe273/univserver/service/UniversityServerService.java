@@ -32,11 +32,10 @@ public class UniversityServerService {
 		return course;
 	}
 
-	public Person adminSignIn(String username, String password) {
+	public boolean adminSignIn(String username, String password) {
+		boolean isAdmin = false;
 
-		Person person = new Person();
-
-		return person;
+		return isAdmin;
 	}
 
 	public String addCourse(StudentCourse[] studentCourse) 
