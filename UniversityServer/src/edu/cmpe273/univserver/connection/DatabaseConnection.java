@@ -12,7 +12,7 @@ public class DatabaseConnection {
 
 	static String url = "jdbc:mysql://localhost:3306/universitydb";
 	static String uname = "root";
-	static String pwd = "admin";
+	static String pwd = "root";
 
 	static Queue<Connection> pool = new LinkedList<Connection>();
 	private static final int MAXPOOLSIZE = 40;
