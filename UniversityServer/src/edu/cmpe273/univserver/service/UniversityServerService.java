@@ -89,7 +89,7 @@ public class UniversityServerService {
 		return person;
 	}
 
-	public Person listAllProfessorss() {
+	public Person listAllProfessors() {
 		Person person = new Person();
 
 		return person;
