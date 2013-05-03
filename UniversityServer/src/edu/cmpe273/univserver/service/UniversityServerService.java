@@ -6,6 +6,7 @@ import edu.cmpe273.univserver.beans.Course;
 import edu.cmpe273.univserver.beans.InstructorCourse;
 import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.beans.StudentCourse;
+import edu.cmpe273.univserver.dao.CourseDAO;
 
 @WebService
 public class UniversityServerService {
@@ -21,7 +22,7 @@ public class UniversityServerService {
 	}
 
 	public String registerUser(Person person) {
-		
+
 		return "";
 	}
 
@@ -130,4 +131,9 @@ public class UniversityServerService {
 		return instructorCourses;
 	}
 
+	public StudentCourse[] getCourseInvoice(String sjsuid) {
+		StudentCourse[] invoiceReply = CourseDAO.getStudentInvoice(sjsuid);
+
+		return invoiceReply;
+	}
 }
