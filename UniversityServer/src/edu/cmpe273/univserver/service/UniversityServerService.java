@@ -13,7 +13,8 @@ public class UniversityServerService {
 		return "Service Is Available";
 	}
 
-	public Person signIn(String username, String password) {
+	public Person signIn(String username, String password) 
+	{
 		Person person = new Person();
 
 		return person;
@@ -36,8 +37,9 @@ public class UniversityServerService {
 		return person;
 	}
 
-	public String addCourse(StudentCourse[] studentCourse) {
-
+	public String addCourse(StudentCourse[] studentCourse) 
+	{
+		
 		return "";
 
 	}
@@ -48,9 +50,14 @@ public class UniversityServerService {
 
 	}
 
-	public StudentCourse[] viewRegisteredCourse(String sjsuid) {
+	public StudentCourse[] viewRegisteredCourse(String sjsuid) 
+	{
 		StudentCourse[] studentCourse = null;
-		;
+		/*while(StudentCourse[].next)
+		{
+			
+		}*/
+		
 		return studentCourse;
 
 	}
