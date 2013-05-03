@@ -15,8 +15,8 @@ public class DatabaseConnection {
 	static String pwd = "admin";
 
 	static Queue<Connection> pool = new LinkedList<Connection>();
-	private static final int MAXPOOLSIZE = 4;
-	private static final int MINPOOLSIZE = 2;
+	private static final int MAXPOOLSIZE = 40;
+	private static final int MINPOOLSIZE = 30;
 	private static boolean onConnectionPool = true;
 	private static boolean created = false;
 	private static int poolsize=0;
