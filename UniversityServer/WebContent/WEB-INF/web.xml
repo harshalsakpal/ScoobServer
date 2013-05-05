@@ -36,4 +36,11 @@
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/servlet/AdminServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+  
+  <servlet-name>LoadonStartUp</servlet-name>
+  <servlet-class>edu.cmpe273.univserver.connection.CreateConnectionPool</servlet-class>
+  <load-on-startup>1</load-on-startup>
+  </servlet>
+  
 </web-app>

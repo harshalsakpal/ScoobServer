@@ -79,9 +79,9 @@ public class DatabaseConnection {
 		Connection conn = null;
 		synchronized (pool) {
 			if (!pool.isEmpty())
-				{System.out.println("using the "+pool.size()+" connection");
+				{//System.out.println("using the "+pool.size()+" connection");
 				conn = pool.poll();
-				System.out.println("pool size after using the object"+pool.size());
+				//System.out.println("pool size after using the object"+pool.size());
 				}
 			else {
 					
@@ -95,7 +95,7 @@ public class DatabaseConnection {
 					}
 					
 					conn = pool.poll();
-					System.out.println("Using the newley created connection"+pool.size());
+					//System.out.println("Using the newley created connection"+pool.size());
 					
 				} else {
 					while (conn == null) {

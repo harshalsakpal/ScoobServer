@@ -7,6 +7,7 @@ import edu.cmpe273.univserver.beans.InstructorCourse;
 import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.beans.StudentCourse;
 import edu.cmpe273.univserver.dao.CourseDAO;
+import edu.cmpe273.univserver.dao.PersonDAO;
 
 @WebService
 public class UniversityServerService {
@@ -33,9 +34,10 @@ public class UniversityServerService {
 	}
 
 	public boolean adminSignIn(String username, String password) {
-		boolean isAdmin = false;
-
-		return isAdmin;
+		
+			PersonDAO pd = new PersonDAO();
+		System.out.println("adminSigninCalled");
+		 return pd.AdminSignIn(username, password);
 	}
 
 	public String addCourse(StudentCourse[] studentCourse) 
