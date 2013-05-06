@@ -162,7 +162,7 @@ public class PersonDAO {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 		try {
-			String sql = "Select username from admin where username=? and password=?";
+			String sql = "";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "");
 			ps.setString(2, "");
