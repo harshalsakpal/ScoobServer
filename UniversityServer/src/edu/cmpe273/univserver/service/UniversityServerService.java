@@ -16,10 +16,9 @@ public class UniversityServerService {
 		return "Server Is Available";
 	}
 
-	public Person signIn(String username, String password) 
-	{
+	public Person signIn(String username, String password) {
 		Person person = null;
-
+//TODO DONE
 		return person;
 	}
 
@@ -30,33 +29,33 @@ public class UniversityServerService {
 
 	public Course searchAllCourses(String category, String input) {
 		Course course = new Course();
+		//TODO DONE
 		return course;
 	}
 
 	public boolean adminSignIn(String username, String password) {
-		
-			PersonDAO pd = new PersonDAO();
+
+		PersonDAO pd = new PersonDAO();
 		System.out.println("adminSigninCalled");
-		 return pd.AdminSignIn(username, password);
+		return pd.AdminSignIn(username, password);
 	}
 
-	public String addCourse(StudentCourse[] studentCourse) 
-	{
-		//DatabaseConnection db = null;
-		return "";
-
-	}
-
-	public String dropCourse(StudentCourse[] studentCourse) 
-	{
+	public String addCourse(StudentCourse[] studentCourse) {
+		// DatabaseConnection db = null;
 		
 		return "";
 
 	}
 
-	public StudentCourse[] viewRegisteredCourse(String sjsuid) 
-	{
+	public String dropCourse(StudentCourse[] studentCourse) {
+
+		return "";
+
+	}
+
+	public StudentCourse[] viewRegisteredCourse(String sjsuid) {
 		StudentCourse[] studentCourse = null;
+		//TODO DONE
 		return studentCourse;
 	}
 
@@ -74,12 +73,13 @@ public class UniversityServerService {
 
 	public String adminAddCourse(Course course) {
 		CourseDAO c = new CourseDAO();
+		//TODO DONE
 		return "";
 	}
 
 	public String adminDeleteCourse(int course_number, String dept) {
 		CourseDAO c = new CourseDAO();
-		
+		//TODO DONE
 		return "";
 	}
 
@@ -88,19 +88,32 @@ public class UniversityServerService {
 		return "";
 	}
 
-	public Person listAllStudents() {
+	public Person[] listAllStudents() {
 
-		Person person = new Person();
-
-		return person;
-	}
-
-	public Person listAllProfessors() {
-		Person person = new Person();
+		Person[] person = null;
+		PersonDAO personDAO = new PersonDAO();
+		person = personDAO.listAllPersons("STUDENT");
 
 		return person;
 	}
 
+	public Person[] listAllProfessors() {
+		Person[] person = null;
+		PersonDAO personDAO = new PersonDAO();
+		person = personDAO.listAllPersons("INSTRUCTOR");
+
+		return person;
+	}
+
+	public Person[] listAllPersons() {
+		Person[] person = null;
+		PersonDAO personDAO = new PersonDAO();
+		person = personDAO.listAllPersons("ALL");
+
+		return person;
+	}
+	
+	
 	public String assignCourseToAProfessor() {
 
 		return "";
