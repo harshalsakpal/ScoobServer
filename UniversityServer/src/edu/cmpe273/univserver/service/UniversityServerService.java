@@ -16,17 +16,10 @@ public class UniversityServerService {
 		return "Server Is Available";
 	}
 
-<<<<<<< HEAD
-	public Person signIn(String username, String password) {
-		Person person = null;
-//TODO DONE
-		return person;
-=======
 	public Person signIn(String username, String password) 
 	{	PersonDAO pd = new PersonDAO();
 		Person p = pd.MemberSignIn(username, password);
 		return p;
->>>>>>> d750ce9e0bfd15972ec804319bbc72f12466ad5a
 	}
 
 	public String registerUser(Person person) {
