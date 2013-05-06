@@ -40,26 +40,24 @@ public class PersonDAO {
 		}
 		return flag;
 	}
-	
-	public Person MemberSignIn(String username,String password)
-	{	
+
+	public Person MemberSignIn(String username, String password) {
 		DatabaseConnection db = new DatabaseConnection();
-		Connection conn= db.getConnection();
-		String user=username;
-		String pword=password;
+		Connection conn = db.getConnection();
+		String user = username;
+		String pword = password;
 		Person p = null;
-	
+
 		ResultSet rs;
 		try {
-			String sql="Select username from admin where username=? and password=?";
+			String sql = "Select username from admin where username=? and password=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user);
 			ps.setString(2, pword);
 			rs = ps.executeQuery();
-			
-			if(rs.next())
-			{
-				p=new Person();
+
+			if (rs.next()) {
+				p = new Person();
 				p.setSjsuid(Integer.toString(rs.getInt(1)));
 				p.setFirstName(rs.getString(2));
 				p.setLastName(rs.getString(3));
@@ -75,27 +73,19 @@ public class PersonDAO {
 				p.setRole(rs.getString(13));
 				p.setContactNumber(rs.getString(14));
 				p.setDepartment(rs.getString(15));
-				return p;				
-				}
-			else
-			{
+				return p;
+			} else {
 				return null;
 			}
-		
-				
-			} 
-		catch (SQLException e) {
+
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			p=null;
+			p = null;
 			return p;
 		}
-		
 
-		 
 	}
-	
-	
 
 	public Person[] listAllPersons(String category) {
 		Person[] personReply = null;
@@ -106,7 +96,8 @@ public class PersonDAO {
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 
-			if (category.equalsIgnoreCase("INSTRUCTOR")	|| category.equalsIgnoreCase("STUDENT")) {
+			if (category.equalsIgnoreCase("INSTRUCTOR")
+					|| category.equalsIgnoreCase("STUDENT")) {
 				sql = "Select * from person where ROLE = ?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, category);
@@ -164,6 +155,31 @@ public class PersonDAO {
 
 		return personReply;
 
+	}
+
+	public boolean registerUser(Person person) {
+		boolean flag = false;
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn = db.getConnection();
+		try {
+			String sql = "Select username from admin where username=? and password=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "");
+			ps.setString(2, "");
+			ResultSet rs = ps.executeQuery();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			db.closeConnection(conn);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+
+			}
+		}
+		return flag;
 	}
 
 }
