@@ -138,7 +138,8 @@ public class UniversityServerService {
 	}
 
 	public StudentCourse[] getCourseInvoice(String sjsuid) {
-		StudentCourse[] invoiceReply = CourseDAO.getStudentInvoice(sjsuid);
+		CourseDAO courseDAO = new CourseDAO();
+		StudentCourse[] invoiceReply = courseDAO.getStudentInvoice(sjsuid);
 
 		return invoiceReply;
 	}
