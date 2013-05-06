@@ -17,10 +17,9 @@ public class UniversityServerService {
 	}
 
 	public Person signIn(String username, String password) 
-	{
-		Person person = null;
-
-		return person;
+	{	PersonDAO pd = new PersonDAO();
+		Person p = pd.MemberSignIn(username, password);
+		return p;
 	}
 
 	public String registerUser(Person person) {

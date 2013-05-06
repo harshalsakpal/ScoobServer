@@ -183,6 +183,40 @@ public class CourseDAO {
 	}
 	public Course getCourse(Course c)
 	{	
+		String Dept=c.getDepartment();
+		String course_number=c.getCourseNumber();
+		String section= c.getSection();
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn= db .getConnection();
+		
+		String sql= "Select * where department='"+Dept+"' and course_no='"+course_number+"' and section_no='"+section+"'";
+		
+		
+		try {
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+				if(rs.next())
+				{
+				c.setCourseNumber(rs.getString(1));
+				c.setCourseName(rs.getString(2));
+				c.setCourseDesc(rs.getString(3));
+				c.setSection(rs.getString(4));
+				c.setCredits(rs.getString(5));
+				c.setDepartment(rs.getString(6));
+				return c;
+				}
+				else
+				{
+				return 	null;
+				}
+			} 
+		catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		}
+		
 		return c;
 	}
 }
