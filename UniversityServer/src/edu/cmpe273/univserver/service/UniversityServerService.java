@@ -30,33 +30,33 @@ public class UniversityServerService {
 
 	public Course searchAllCourses(String category, String input) {
 		Course course = new Course();
+		
 		return course;
 	}
 
 	public boolean adminSignIn(String username, String password) {
-		
-			PersonDAO pd = new PersonDAO();
+
+		PersonDAO pd = new PersonDAO();
 		System.out.println("adminSigninCalled");
-		 return pd.AdminSignIn(username, password);
+		return pd.AdminSignIn(username, password);
 	}
 
-	public String addCourse(StudentCourse[] studentCourse) 
-	{
-		//DatabaseConnection db = null;
-		return "";
-
-	}
-
-	public String dropCourse(StudentCourse[] studentCourse) 
-	{
+	public String addCourse(StudentCourse[] studentCourse) {
+		// DatabaseConnection db = null;
 		
 		return "";
 
 	}
 
-	public StudentCourse[] viewRegisteredCourse(String sjsuid) 
-	{
+	public String dropCourse(StudentCourse[] studentCourse) {
+
+		return "";
+
+	}
+
+	public StudentCourse[] viewRegisteredCourse(String sjsuid) {
 		StudentCourse[] studentCourse = null;
+		
 		return studentCourse;
 	}
 
@@ -74,6 +74,7 @@ public class UniversityServerService {
 
 	public String adminAddCourse(Course course) {
 		CourseDAO c = new CourseDAO();
+		
 		return "";
 	}
 
@@ -88,19 +89,32 @@ public class UniversityServerService {
 		return "";
 	}
 
-	public Person listAllStudents() {
+	public Person[] listAllStudents() {
 
-		Person person = new Person();
-
-		return person;
-	}
-
-	public Person listAllProfessors() {
-		Person person = new Person();
+		Person[] person = null;
+		PersonDAO personDAO = new PersonDAO();
+		person = personDAO.listAllPersons("STUDENT");
 
 		return person;
 	}
 
+	public Person[] listAllProfessors() {
+		Person[] person = null;
+		PersonDAO personDAO = new PersonDAO();
+		person = personDAO.listAllPersons("INSTRUCTOR");
+
+		return person;
+	}
+
+	public Person[] listAllPersons() {
+		Person[] person = null;
+		PersonDAO personDAO = new PersonDAO();
+		person = personDAO.listAllPersons("ALL");
+
+		return person;
+	}
+	
+	
 	public String assignCourseToAProfessor() {
 
 		return "";
@@ -138,7 +152,8 @@ public class UniversityServerService {
 	}
 
 	public StudentCourse[] getCourseInvoice(String sjsuid) {
-		StudentCourse[] invoiceReply = CourseDAO.getStudentInvoice(sjsuid);
+		CourseDAO courseDAO = new CourseDAO();
+		StudentCourse[] invoiceReply = courseDAO.getStudentInvoice(sjsuid);
 
 		return invoiceReply;
 	}

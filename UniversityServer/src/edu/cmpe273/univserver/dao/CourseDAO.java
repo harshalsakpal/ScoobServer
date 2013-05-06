@@ -11,7 +11,7 @@ import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class CourseDAO {
 
-	public static StudentCourse[] getStudentInvoice(String sjsuid) {
+	public StudentCourse[] getStudentInvoice(String sjsuid) {
 		StudentCourse[] invoiceReply = null;
 
 		DatabaseConnection db = null;
