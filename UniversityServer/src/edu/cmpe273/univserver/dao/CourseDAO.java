@@ -56,9 +56,30 @@ public class CourseDAO {
 			e.printStackTrace();
 		}finally{
 			db.closeConnection(conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return invoiceReply;
 	}
 
+	public String adminAddCourse()
+	{
+		
+		return "";
+	}
+	public String editAddCourse()
+	{
+		return "";
+		
+	}
+	public String deleteAddCourse()
+	{
+		return "";
+		
+	}
 }

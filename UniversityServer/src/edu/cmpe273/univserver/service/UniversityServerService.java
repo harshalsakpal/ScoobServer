@@ -73,17 +73,18 @@ public class UniversityServerService {
 	}
 
 	public String adminAddCourse(Course course) {
-
+		CourseDAO c = new CourseDAO();
 		return "";
 	}
 
-	public String adminDeleteCourse(Course course) {
-
+	public String adminDeleteCourse(int course_number, String dept) {
+		CourseDAO c = new CourseDAO();
+		
 		return "";
 	}
 
-	public String adminEditCourse(Course course) {
-
+	public String adminEditCourse(int course_number, String dept) {
+		CourseDAO c = new CourseDAO();
 		return "";
 	}
 
