@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import edu.cmpe273.univserver.beans.Course;
 import edu.cmpe273.univserver.beans.StudentCourse;
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
@@ -43,7 +44,7 @@ public class CourseDAO {
 						.setCourseLocation(rs.getString("COURSE_LOCATION"));
 				studentCourse.setCourseDay(rs.getString("COURSE_DAY"));
 				studentCourse.setCourseTime(rs.getString("COURSE_TIME"));
-
+  
 				invoiceReply[iCount] = studentCourse;
 				iCount++;
 			}
@@ -67,19 +68,121 @@ public class CourseDAO {
 		return invoiceReply;
 	}
 
-	public String adminAddCourse()
-	{
+	public String adminAddCourse(Course course)
+	{	String course_name=course.getCourseName();
+		String course_number=course.getCourseName();
+		String credits=course.getCredits();
+		String description=course.getCourseDesc();
+		String dept=course.getDepartment();
+		String section = course.getSection();
 		
-		return "";
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn= db .getConnection();
+		
+		String sql= "insert into courses(course_no,course_name,course_desc,section_no,credits,department) values(?,?,?,?,?,?)";
+		
+		
+		try {
+			System.out.println("inside");
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, course_number);
+			ps.setString(2,course_name);
+			ps.setString(3, description);
+			ps.setString(4, section);
+			ps.setString(5, credits);
+			ps.setString(6, dept);
+			
+			if(ps.executeUpdate()==1)
+			{
+				return "Course Added Successfully";
+			}
+			else
+			{
+				return "Failure";
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return "Duplicate Entry";
+		}
+		finally
+		{
+			
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+}
+	
+	public String editAddCourse(Course c)
+	{
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn= db .getConnection();
+		
+		
+		
+		
+		try {
+			
+			String sql= "update courses set (course_no,course_name,course_desc,section_no,credits,department) values(?,?,?,?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+	
+			
+			if(ps.executeUpdate()==1)
+			{
+				return "Course Added Successfully";
+			}
+			else
+			{
+				return "Failure";
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return "Duplicate Entry";
+		}
+		
 	}
-	public String editAddCourse()
+	public String deleteAddCourse(Course c)
 	{
-		return "";
+		String Dept=c.getDepartment();
+		String course_number=c.getCourseNumber();
+		String section= c.getSection();
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn= db .getConnection();
+		
+		String sql= "delete courses where department='"+Dept+"' and course_no='"+course_number+"' and section_no='"+section+"'";
+		
+		
+		try {
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			
+			if(ps.executeUpdate()==1)
+			{
+				return "Course Deleted Successfully";
+			}
+			else
+			{
+				return "Course Does not Exist";
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return "Failure";
+		}
+		
 		
 	}
-	public String deleteAddCourse()
-	{
-		return "";
-		
+	public Course getCourse(Course c)
+	{	
+		return c;
 	}
 }
