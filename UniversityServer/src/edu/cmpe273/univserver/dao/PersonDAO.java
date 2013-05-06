@@ -6,10 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import edu.cmpe273.univserver.beans.Person;
-<<<<<<< HEAD
-import edu.cmpe273.univserver.beans.StudentCourse;
-=======
->>>>>>> d750ce9e0bfd15972ec804319bbc72f12466ad5a
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class PersonDAO {
