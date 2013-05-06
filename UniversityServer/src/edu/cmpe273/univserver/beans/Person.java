@@ -4,7 +4,6 @@ public class Person {
 
 	private String sjsuid;
 	private String firstName;
-	private String middleName;
 	private String lastName;
 	private String addrLine1;
 	private String addrLine2;
@@ -17,6 +16,15 @@ public class Person {
 	private String gender;
 	private String role;
 	private String contactNumber;
+	private String department;
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
 
 	public String getContactNumber() {
 		return contactNumber;
@@ -42,13 +50,7 @@ public class Person {
 		this.firstName = firstName;
 	}
 
-	public String getMiddleName() {
-		return middleName;
-	}
 
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
 
 	public String getLastName() {
 		return lastName;
