@@ -57,7 +57,7 @@ public class PersonDAO {
 	
 		ResultSet rs;
 		try {
-			String sql="Select username from admin where username=? and password=?";
+			String sql="Select * from person where SJSUID=? and password=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user);
 			ps.setString(2, pword);

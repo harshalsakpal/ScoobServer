@@ -17,7 +17,8 @@ public class UniversityServerService {
 	}
 
 	public Person signIn(String username, String password) 
-	{	PersonDAO pd = new PersonDAO();
+	{	//System.out.println("Memeber Signin Called");
+		PersonDAO pd = new PersonDAO();
 		Person p = pd.MemberSignIn(username, password);
 		return p;
 	}
