@@ -18,7 +18,8 @@ public class UniversityServerService {
 	}
 
 	public Person signIn(String username, String password) 
-	{	PersonDAO pd = new PersonDAO();
+	{	//System.out.println("Memeber Signin Called");
+		PersonDAO pd = new PersonDAO();
 		Person p = pd.MemberSignIn(username, password);
 		return p;
 	}
@@ -38,7 +39,7 @@ public class UniversityServerService {
 
 	public Course searchAllCourses(String category, String input) {
 		Course course = new Course();
-		//TODO DONE
+		
 		return course;
 	}
 
@@ -64,7 +65,7 @@ public class UniversityServerService {
 
 	public StudentCourse[] viewRegisteredCourse(String sjsuid) {
 		StudentCourse[] studentCourse = null;
-		//TODO DONE
+		
 		return studentCourse;
 	}
 
@@ -82,13 +83,13 @@ public class UniversityServerService {
 
 	public String adminAddCourse(Course course) {
 		CourseDAO c = new CourseDAO();
-		//TODO DONE
-		return "";
+		return c.adminAddCourse(course);
+		
 	}
 
 	public String adminDeleteCourse(int course_number, String dept) {
 		CourseDAO c = new CourseDAO();
-		//TODO DONE
+		
 		return "";
 	}
 

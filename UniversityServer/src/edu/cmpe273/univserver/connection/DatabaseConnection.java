@@ -147,10 +147,10 @@ public class DatabaseConnection {
 				}
 				System.out.println("Number of Connections Properly Closed "+j);
 				System.out.println(pool.size());
-				while(pool.size()>0)
-				{
-					System.out.println(pool.poll().isClosed());
-				}
+//				while(pool.size()>0)
+//				{
+//					System.out.println(pool.poll().isClosed());
+//				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
