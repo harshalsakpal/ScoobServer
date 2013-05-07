@@ -78,15 +78,15 @@ public class UniversityServerService {
 		
 	}
 
-	public String adminDeleteCourse(int course_number, String dept) {
+	public String adminDeleteCourse(Course course) {
 		CourseDAO c = new CourseDAO();
 		
-		return "";
+		return  c.adminDeleteCourse(course); 
 	}
 
-	public String adminEditCourse(int course_number, String dept) {
+	public String adminEditCourse(Course course) {
 		CourseDAO c = new CourseDAO();
-		return "";
+		return c.adminEditCourse(course);
 	}
 
 	public Person[] listAllStudents() {
@@ -115,7 +115,7 @@ public class UniversityServerService {
 	}
 	
 	
-	public String assignCourseToAProfessor() {
+	public String assignCourseToAProfessor(Course c, Person p) {
 
 		return "";
 	}
@@ -156,5 +156,10 @@ public class UniversityServerService {
 		StudentCourse[] invoiceReply = courseDAO.getStudentInvoice(sjsuid);
 
 		return invoiceReply;
+	}
+	public Course getCourseDetails(Course course)
+	{
+		CourseDAO courseDAO = new CourseDAO();
+		return courseDAO.getCourseDetails(course);
 	}
 }
