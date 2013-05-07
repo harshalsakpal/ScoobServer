@@ -140,18 +140,39 @@ public class UniversityServerService {
 	}
 
 	public String deleteStudentInformation(Person person) {
-
-		return "";
+		PersonDAO personDAO = new PersonDAO();
+		String deleteReply = personDAO.deleteStudentInformation(person.getSjsuid());
+		System.out.println("Delete Reply >> "+deleteReply);
+		return deleteReply;
 	}
 
 	public String deleteProfessorInformation(Person person) {
-
-		return "";
+		PersonDAO personDAO = new PersonDAO();
+		System.out.println("SJSU ID IN DELETE PROFESSOR>>> "+person.getSjsuid());
+		String deleteReply = personDAO.deleteProfessorInformation(person.getSjsuid());
+		System.out.println("Delete Reply >> "+deleteReply);
+		return deleteReply;
 	}
+	
 
 	public String editProfessorInformation(Person person) {
 
 		return "";
+	}
+	
+	public Person searchStudentInformation(String input){
+		Person person = new Person();
+		PersonDAO personDAO = new PersonDAO();
+		person = personDAO.getStudentInformation(input);
+		return person;
+		
+	}
+	
+	public Person searchInstructorInformation(String input){
+		Person person = new Person();
+		PersonDAO personDAO = new PersonDAO();
+		person = personDAO.getProfessorInformation(input);
+		return person;
 	}
 
 	public InstructorCourse[] viewAssignedCourses(String sjsuid) {
