@@ -27,11 +27,11 @@ public class UniversityServerService {
 		RegisterValidator validator = new RegisterValidator();
 		PersonDAO personDAO = new PersonDAO();
 		String message = "";
-		boolean isAdded = false;
 		message = validator.validateRegisterInput(person);
-		
+		System.out.println("After Vaidating inputs at front end "+message);
 		if("SUCCESS".equals(message)){
-			isAdded = personDAO.registerUser(person);
+			message = personDAO.registerUser(person);
+			System.out.println("SJSU ID created after inserting "+message);
 		}
 		return message;
 	}

@@ -38,6 +38,7 @@ public class RegisterValidator {
 		}
 		
 		if(person.getZipCode()==null || !util.isNumber(person.getZipCode())){
+			System.out.println("Zip Code in validator >>"+person.getZipCode());
 			return "Invalid Zip Codes";
 		}
 		

@@ -157,29 +157,84 @@ public class PersonDAO {
 
 	}
 
-	public boolean registerUser(Person person) {
-		boolean flag = false;
+	public String registerUser(Person person) {
+		String sjsuid = "";
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
+		String sql = "";
+		
 		try {
-			String sql = "";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, "");
-			ps.setString(2, "");
-			ResultSet rs = ps.executeQuery();
-
+			PreparedStatement ps = null;	
+			ResultSet resultSet = null;
+			sql = "SELECT SJSUID FROM PERSON WHERE EMAIL_ID = ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, person.getEmailid());
+			resultSet = ps.executeQuery();
+			
+			while(resultSet.next()){
+				System.out.println("SJSU ID RETURNED IS :: "+resultSet.getString("SJSUID"));
+				sjsuid = "Email id already Exists";
+			}
+			resultSet.beforeFirst();
+			
+			if (!resultSet.next()) {			
+				sql = "INSERT INTO PERSON (`FIRST_NAME`,`LAST_NAME`,`ADDR_LINE_1`,`ADDR_LINE_2`,`CITY_NAME`," +
+						"`STATE_NAME`,`ZIPCODE`,`EMAIL_ID`,`PASSWORD`,`DATEOFBIRTH`,`GENDER`,`ROLE`,`CONTACT_NUMBER`,`DEPARTMENT`) " +
+						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				
+				ps = conn.prepareStatement(sql);
+				
+				ps.setString(1, person.getFirstName());
+				ps.setString(2, person.getLastName());
+				ps.setString(3, person.getAddrLine1());
+				ps.setString(4, person.getAddrLine2());
+				ps.setString(5, person.getCityName());
+				ps.setString(6, person.getStateName());
+				ps.setString(7, person.getZipCode());
+				ps.setString(8, person.getEmailid());
+				ps.setString(9, person.getPassword());
+				ps.setString(10, person.getDateOfBirth());
+				ps.setString(11, person.getGender());
+				ps.setString(12, person.getRole());
+				ps.setString(13, person.getContactNumber());
+				ps.setString(14, person.getDepartment());
+				
+				ps.executeUpdate();
+				
+				System.out.println("After Executing insert");
+				
+				sql = "SELECT SJSUID FROM PERSON WHERE EMAIL_ID = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, person.getEmailid());
+				resultSet = ps.executeQuery();
+				
+				System.out.println("After Executing Select");
+				while(resultSet.next()){
+					sjsuid = resultSet.getString("SJSUID");
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
+			return "Registration Unsuccessful";
 		} finally {
+			try {
+				conn.commit();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			db.closeConnection(conn);
 
 			try {
+				
 				conn.close();
 			} catch (SQLException e) {
-
+				e.printStackTrace();
 			}
 		}
-		return flag;
+		return sjsuid;
 	}
 
 }
