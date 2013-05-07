@@ -8,6 +8,7 @@ import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.beans.StudentCourse;
 import edu.cmpe273.univserver.dao.CourseDAO;
 import edu.cmpe273.univserver.dao.PersonDAO;
+import edu.cmpe273.univserver.validator.RegisterValidator;
 
 @WebService
 public class UniversityServerService {
@@ -24,8 +25,16 @@ public class UniversityServerService {
 	}
 
 	public String registerUser(Person person) {
-
-		return "";
+		RegisterValidator validator = new RegisterValidator();
+		PersonDAO personDAO = new PersonDAO();
+		String message = "";
+		message = validator.validateRegisterInput(person);
+		System.out.println("After Vaidating inputs at front end "+message);
+		if("SUCCESS".equals(message)){
+			message = personDAO.registerUser(person);
+			System.out.println("SJSU ID created after inserting "+message);
+		}
+		return message;
 	}
 
 	public Course searchAllCourses(String category, String input) {
