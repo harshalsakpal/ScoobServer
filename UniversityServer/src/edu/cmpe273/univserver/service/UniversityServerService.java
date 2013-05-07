@@ -74,8 +74,8 @@ public class UniversityServerService {
 
 	public String adminAddCourse(Course course) {
 		CourseDAO c = new CourseDAO();
+		return c.adminAddCourse(course);
 		
-		return "";
 	}
 
 	public String adminDeleteCourse(int course_number, String dept) {

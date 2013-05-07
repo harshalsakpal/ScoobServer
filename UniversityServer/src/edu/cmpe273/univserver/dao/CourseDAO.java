@@ -70,7 +70,7 @@ public class CourseDAO {
 
 	public String adminAddCourse(Course course)
 	{	String course_name=course.getCourseName();
-		String course_number=course.getCourseName();
+		String course_number=course.getCourseNumber();
 		String credits=course.getCredits();
 		String description=course.getCourseDesc();
 		String dept=course.getDepartment();
@@ -93,18 +93,18 @@ public class CourseDAO {
 			ps.setString(6, dept);
 			
 			if(ps.executeUpdate()==1)
-			{
+			{	conn.commit();
 				return "Course Added Successfully";
 			}
 			else
 			{
-				return "Failure";
+				return "Course Adding Failure:Try Again";
 			}
 			
 		} catch (Exception e) {
 			
-			e.printStackTrace();
-			return "Duplicate Entry";
+			//e.printStackTrace();
+			return "Course Adding Failure:Duplicate Entry";
 		}
 		finally
 		{
