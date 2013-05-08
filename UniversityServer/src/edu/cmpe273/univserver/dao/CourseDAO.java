@@ -279,6 +279,7 @@ public class CourseDAO {
 				}
 
 			} catch (Exception e) {
+				e.printStackTrace();
 				return "Course Adding Failure:Duplicate Entry";
 			} finally {
 			}

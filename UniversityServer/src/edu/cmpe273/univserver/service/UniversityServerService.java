@@ -61,8 +61,9 @@ public class UniversityServerService {
 		return addCourseReply;
 	}
 
-	public String dropCourse(String sjsu_id, String name) {
-		String del = Student_drop.dropCourse(sjsu_id, name);
+	public String dropCourse(String sjsu_id, String name,String section) {
+		Student_drop sd= new Student_drop();
+		String del = sd.dropCourse(sjsu_id, name,section);
 		return del;
 
 	}
