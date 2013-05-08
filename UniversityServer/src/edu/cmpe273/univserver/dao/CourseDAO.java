@@ -118,37 +118,48 @@ public class CourseDAO {
 		}
 }
 	
-	public String editAddCourse(Course c)
+	public String adminEditCourse(Course course)
 	{
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn= db .getConnection();
 		
-		
+		String course_name=course.getCourseName();
+		String course_number=course.getCourseNumber();
+		String credits=course.getCredits();
+		String description=course.getCourseDesc();
+		String dept=course.getDepartment();
+		String section = course.getSection();
 		
 		
 		try {
 			
-			String sql= "update courses set (course_no,course_name,course_desc,section_no,credits,department) values(?,?,?,?,?,?)";
+			String sql= "update courses set course_name=?,course_desc=?,credits=? where department=? and course_no=? and section_no=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-	
+			ps.setString(1, course_name);
+			ps.setString(2,description);
+			ps.setString(3, credits);
+			ps.setString(4, dept);
+			ps.setString(5, course_number);
+			ps.setString(6, section);
 			
 			if(ps.executeUpdate()==1)
-			{
-				return "Course Added Successfully";
+			{	System.out.println(sql);
+				conn.commit();
+				return "Course Edited Successfully";
 			}
 			else
 			{
-				return "Failure";
+				return "Course Does Not  Exist!!!";
 			}
 			
 		} catch (Exception e) {
-			
 			e.printStackTrace();
-			return "Duplicate Entry";
+			
+			return "Failure Try Again!!!";
 		}
 		
 	}
-	public String deleteAddCourse(Course c)
+	public String adminDeleteCourse(Course c)
 	{
 		String Dept=c.getDepartment();
 		String course_number=c.getCourseNumber();
@@ -156,7 +167,7 @@ public class CourseDAO {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn= db .getConnection();
 		
-		String sql= "delete courses where department='"+Dept+"' and course_no='"+course_number+"' and section_no='"+section+"'";
+		String sql= "delete from courses where department='"+Dept+"' and course_no='"+course_number+"' and section_no='"+section+"'";
 		
 		
 		try {
@@ -165,7 +176,7 @@ public class CourseDAO {
 			
 			
 			if(ps.executeUpdate()==1)
-			{
+			{	conn.commit();
 				return "Course Deleted Successfully";
 			}
 			else
@@ -175,13 +186,13 @@ public class CourseDAO {
 			
 		} catch (Exception e) {
 			
-			e.printStackTrace();
-			return "Failure";
+			//e.printStackTrace();
+			return "Failure:Try Again";
 		}
 		
 		
 	}
-	public Course getCourse(Course c)
+	public Course getCourseDetails(Course c)
 	{	
 		String Dept=c.getDepartment();
 		String course_number=c.getCourseNumber();
@@ -189,7 +200,7 @@ public class CourseDAO {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn= db .getConnection();
 		
-		String sql= "Select * where department='"+Dept+"' and course_no='"+course_number+"' and section_no='"+section+"'";
+		String sql= "Select * from Courses where department='"+Dept+"' and course_no='"+course_number+"' and section_no='"+section+"'";
 		
 		
 		try {
