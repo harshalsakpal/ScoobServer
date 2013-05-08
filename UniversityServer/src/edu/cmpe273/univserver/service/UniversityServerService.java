@@ -1,5 +1,7 @@
 package edu.cmpe273.univserver.service;
 
+import java.sql.SQLException;
+
 import javax.jws.WebService;
 
 import edu.cmpe273.univserver.beans.Course;
@@ -9,6 +11,7 @@ import edu.cmpe273.univserver.beans.StudentCourse;
 import edu.cmpe273.univserver.dao.CourseDAO;
 import edu.cmpe273.univserver.dao.InstructorCourseDAO;
 import edu.cmpe273.univserver.dao.PersonDAO;
+import edu.cmpe273.univserver.dao.SearchCourseDAO;
 import edu.cmpe273.univserver.validator.RegisterValidator;
 
 @WebService
@@ -18,8 +21,7 @@ public class UniversityServerService {
 		return "Server Is Available";
 	}
 
-	public Person signIn(String username, String password) 
-	{	//System.out.println("Memeber Signin Called");
+	public Person signIn(String username, String password) { // System.out.println("Memeber Signin Called");
 		PersonDAO pd = new PersonDAO();
 		Person p = pd.MemberSignIn(username, password);
 		return p;
@@ -30,17 +32,17 @@ public class UniversityServerService {
 		PersonDAO personDAO = new PersonDAO();
 		String message = "";
 		message = validator.validateRegisterInput(person);
-		System.out.println("After Vaidating inputs at front end "+message);
-		if("SUCCESS".equals(message)){
+		System.out.println("After Vaidating inputs at front end " + message);
+		if ("SUCCESS".equals(message)) {
 			message = personDAO.registerUser(person);
-			System.out.println("SJSU ID created after inserting "+message);
+			System.out.println("SJSU ID created after inserting " + message);
 		}
 		return message;
 	}
 
-	public Course searchAllCourses(String category, String input) {
-		Course course = new Course();
-		
+	public Course[] searchAllCourses(String category, String input)
+			throws SQLException {
+		Course[] course = SearchCourseDAO.searchcourses(category, input);
 		return course;
 	}
 
@@ -51,11 +53,9 @@ public class UniversityServerService {
 		return pd.AdminSignIn(username, password);
 	}
 
-	public String addCourse(StudentCourse[] studentCourse) {
-		// DatabaseConnection db = null;
-		
-		return "";
+	public String addCourse(StudentCourse studentCourse) {
 
+		return "";
 	}
 
 	public String dropCourse(StudentCourse[] studentCourse) {
@@ -65,8 +65,7 @@ public class UniversityServerService {
 	}
 
 	public StudentCourse[] viewRegisteredCourse(String sjsuid) {
-		StudentCourse[] studentCourse = null;
-		
+		StudentCourse[] studentCourse = CourseDAO.ViewCourses(sjsuid);
 		return studentCourse;
 	}
 
@@ -85,13 +84,13 @@ public class UniversityServerService {
 	public String adminAddCourse(Course course) {
 		CourseDAO c = new CourseDAO();
 		return c.adminAddCourse(course);
-		
+
 	}
 
 	public String adminDeleteCourse(Course course) {
 		CourseDAO c = new CourseDAO();
-		
-		return  c.adminDeleteCourse(course); 
+
+		return c.adminDeleteCourse(course);
 	}
 
 	public String adminEditCourse(Course course) {
@@ -123,12 +122,10 @@ public class UniversityServerService {
 
 		return person;
 	}
-	
-	
+
 	public String assignCourseToAProfessor(InstructorCourse ic) {
-		InstructorCourseDAO icd= new InstructorCourseDAO();
-		
-		
+		InstructorCourseDAO icd = new InstructorCourseDAO();
+
 		return icd.AssignCourse(ic);
 	}
 
@@ -144,35 +141,37 @@ public class UniversityServerService {
 
 	public String deleteStudentInformation(Person person) {
 		PersonDAO personDAO = new PersonDAO();
-		String deleteReply = personDAO.deleteStudentInformation(person.getSjsuid());
-		System.out.println("Delete Reply >> "+deleteReply);
+		String deleteReply = personDAO.deleteStudentInformation(person
+				.getSjsuid());
+		System.out.println("Delete Reply >> " + deleteReply);
 		return deleteReply;
 	}
 
 	public String deleteProfessorInformation(Person person) {
 		PersonDAO personDAO = new PersonDAO();
-		System.out.println("SJSU ID IN DELETE PROFESSOR>>> "+person.getSjsuid());
-		String deleteReply = personDAO.deleteProfessorInformation(person.getSjsuid());
-		System.out.println("Delete Reply >> "+deleteReply);
+		System.out.println("SJSU ID IN DELETE PROFESSOR>>> "
+				+ person.getSjsuid());
+		String deleteReply = personDAO.deleteProfessorInformation(person
+				.getSjsuid());
+		System.out.println("Delete Reply >> " + deleteReply);
 		return deleteReply;
 	}
-	
 
 	public String editProfessorInformation(Person person) {
 		PersonDAO personDAO = new PersonDAO();
 		String editReply = personDAO.editProfessorInformation(person);
-		System.out.println("Update Reply >> "+editReply);
+		System.out.println("Update Reply >> " + editReply);
 		return editReply;
 	}
-	
-	public Person searchStudentInformation(String input){
+
+	public Person searchStudentInformation(String input) {
 		Person person = new Person();
 		PersonDAO personDAO = new PersonDAO();
 		person = personDAO.getStudentInformation(input);
 		return person;
 	}
-	
-	public Person searchInstructorInformation(String input){
+
+	public Person searchInstructorInformation(String input) {
 		Person person = new Person();
 		PersonDAO personDAO = new PersonDAO();
 		person = personDAO.getProfessorInformation(input);
@@ -191,8 +190,8 @@ public class UniversityServerService {
 
 		return invoiceReply;
 	}
-	public Course getCourseDetails(Course course)
-	{
+
+	public Course getCourseDetails(Course course) {
 		CourseDAO courseDAO = new CourseDAO();
 		return courseDAO.getCourseDetails(course);
 	}
