@@ -383,7 +383,7 @@ public class PersonDAO {
 
 		ResultSet rs;
 		try {
-			String sql = "Select * from person where SJSUID=? And Role = 'INSTRUCTOR'";
+			String sql = "Select * from person where SJSUID=? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, sjsuid);
 			rs = ps.executeQuery();
@@ -432,4 +432,56 @@ public class PersonDAO {
 		return p;
 	}
 
+	public String editProfessorInformation(Person person){
+		String flag = "Record Was Not Deleted";
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn = db.getConnection();
+		try {
+			//TODO WRITE UPDATE STATEMENT....
+			
+			String sql1 = "UPDATE PERSON FIRST_NAME = ?, LAST_NAME=?, ADDR_LINE_1=?, ADDR_LINE_2=?, CITY_NAME=?, STATE_NAME=?, ZIPCODE=?, " +
+					"EMAIL_ID=?, PASSWORD=?, DATEOFBIRTH=?, DEPARTMENT=?  " +
+					"WHERE SJSUID= ? ";
+			
+			PreparedStatement ps1 = conn.prepareStatement(sql1);
+			ps1.setString(1, person.getFirstName());
+			ps1.setString(2, person.getLastName());
+			ps1.setString(3, person.getAddrLine1());
+			ps1.setString(4, person.getAddrLine2());
+			ps1.setString(5, person.getCityName());
+			ps1.setString(6, person.getStateName());
+			ps1.setString(7, person.getZipCode());
+			ps1.setString(8, person.getEmailid());
+			ps1.setString(9, person.getPassword());
+			ps1.setString(10, person.getDateOfBirth());
+			ps1.setString(11, person.getDepartment());
+			ps1.setString(12, person.getSjsuid());
+			
+
+			if (ps1.executeUpdate() == 1 )
+				flag = "Update Success";
+			else
+				flag = "No Record Updated";
+		} catch (Exception e) {
+
+		} finally {
+			try {
+				conn.commit();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			db.closeConnection(conn);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+
+			}
+		}
+		return flag;
+
+	}
+	
+	
 }

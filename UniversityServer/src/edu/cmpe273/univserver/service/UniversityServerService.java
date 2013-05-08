@@ -159,8 +159,11 @@ public class UniversityServerService {
 	
 
 	public String editProfessorInformation(Person person) {
-
-		return "";
+		PersonDAO personDAO = new PersonDAO();
+		System.out.println("SJSU ID IN EDIT PROFESSOR>>> "+person.getSjsuid());
+		String editReply = personDAO.deleteProfessorInformation(person.getSjsuid());
+		System.out.println("Delete Reply >> "+editReply);
+		return editReply;
 	}
 	
 	public Person searchStudentInformation(String input){
@@ -168,7 +171,6 @@ public class UniversityServerService {
 		PersonDAO personDAO = new PersonDAO();
 		person = personDAO.getStudentInformation(input);
 		return person;
-		
 	}
 	
 	public Person searchInstructorInformation(String input){
