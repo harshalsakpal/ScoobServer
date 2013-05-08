@@ -18,7 +18,8 @@ public class RegisterValidator {
 		}
 		
 		if(person.getDateOfBirth()==null || !util.isChar(person.getLastName())){
-			return "Invalid Last Name";
+			
+			return "Invalid Date of Birth";
 		}
 		
 		if(person.getAddrLine1()==null || !util.isAddress(person.getAddrLine1())){
