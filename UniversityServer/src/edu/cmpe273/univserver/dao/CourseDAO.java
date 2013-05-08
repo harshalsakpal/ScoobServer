@@ -83,7 +83,7 @@ public class CourseDAO {
 		
 		
 		try {
-			System.out.println("inside");
+			//System.out.println("inside");
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, course_number);
 			ps.setString(2,course_name);

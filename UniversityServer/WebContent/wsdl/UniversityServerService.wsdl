@@ -184,8 +184,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="assignCourseToAProfessor">
     <complexType>
      <sequence>
-      <element name="c" type="tns1:Course"/>
-      <element name="p" type="tns1:Person"/>
+      <element name="ic" type="tns1:InstructorCourse"/>
      </sequence>
     </complexType>
    </element>
@@ -399,6 +398,19 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="zipCode" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
+   <complexType name="InstructorCourse">
+    <sequence>
+     <element name="availableSeats" nillable="true" type="xsd:string"/>
+     <element name="courseNumber" nillable="true" type="xsd:string"/>
+     <element name="day" nillable="true" type="xsd:string"/>
+     <element name="department" nillable="true" type="xsd:string"/>
+     <element name="filledSeats" nillable="true" type="xsd:string"/>
+     <element name="location" nillable="true" type="xsd:string"/>
+     <element name="section" nillable="true" type="xsd:string"/>
+     <element name="sjsuid" nillable="true" type="xsd:string"/>
+     <element name="time" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
    <complexType name="Course">
     <sequence>
      <element name="courseDesc" nillable="true" type="xsd:string"/>
@@ -407,18 +419,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="credits" nillable="true" type="xsd:string"/>
      <element name="department" nillable="true" type="xsd:string"/>
      <element name="section" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-   <complexType name="InstructorCourse">
-    <sequence>
-     <element name="availableSeats" nillable="true" type="xsd:string"/>
-     <element name="courseNumber" nillable="true" type="xsd:string"/>
-     <element name="day" nillable="true" type="xsd:string"/>
-     <element name="filledSeats" nillable="true" type="xsd:string"/>
-     <element name="location" nillable="true" type="xsd:string"/>
-     <element name="section" nillable="true" type="xsd:string"/>
-     <element name="sjsuid" nillable="true" type="xsd:string"/>
-     <element name="time" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
   </schema>

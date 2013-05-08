@@ -10,6 +10,15 @@ public class InstructorCourse {
 	private String section;
 	private String availableSeats;
 	private String filledSeats;
+	private String department;
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
 
 	public String getCourseNumber() {
 		return courseNumber;

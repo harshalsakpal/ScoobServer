@@ -50,8 +50,7 @@
         <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://beans.univserver.cmpe273.edu" qname="pns:person" type="tns:Person"/>
       </operation>
       <operation xmlns:operNS="http://service.univserver.cmpe273.edu" xmlns:retNS="http://service.univserver.cmpe273.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="assignCourseToAProfessor" qname="operNS:assignCourseToAProfessor" returnQName="retNS:assignCourseToAProfessorReturn" returnType="rtns:string" soapAction="">
-        <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://beans.univserver.cmpe273.edu" qname="pns:c" type="tns:Course"/>
-        <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://beans.univserver.cmpe273.edu" qname="pns:p" type="tns:Person"/>
+        <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://beans.univserver.cmpe273.edu" qname="pns:ic" type="tns:InstructorCourse"/>
       </operation>
       <operation xmlns:operNS="http://service.univserver.cmpe273.edu" xmlns:retNS="http://service.univserver.cmpe273.edu" xmlns:rtns="http://beans.univserver.cmpe273.edu" name="listAllProfessors" qname="operNS:listAllProfessors" returnQName="retNS:listAllProfessorsReturn" returnType="rtns:Person" soapAction="">
       </operation>
