@@ -160,9 +160,8 @@ public class UniversityServerService {
 
 	public String editProfessorInformation(Person person) {
 		PersonDAO personDAO = new PersonDAO();
-		System.out.println("SJSU ID IN EDIT PROFESSOR>>> "+person.getSjsuid());
-		String editReply = personDAO.deleteProfessorInformation(person.getSjsuid());
-		System.out.println("Delete Reply >> "+editReply);
+		String editReply = personDAO.editProfessorInformation(person);
+		System.out.println("Update Reply >> "+editReply);
 		return editReply;
 	}
 	

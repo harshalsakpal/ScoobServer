@@ -433,14 +433,14 @@ public class PersonDAO {
 	}
 
 	public String editProfessorInformation(Person person){
-		String flag = "Record Was Not Deleted";
+		String flag = "Record Was Not Updated";
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 		try {
 			//TODO WRITE UPDATE STATEMENT....
 			
-			String sql1 = "UPDATE PERSON FIRST_NAME = ?, LAST_NAME=?, ADDR_LINE_1=?, ADDR_LINE_2=?, CITY_NAME=?, STATE_NAME=?, ZIPCODE=?, " +
-					"EMAIL_ID=?, PASSWORD=?, DATEOFBIRTH=?, DEPARTMENT=?  " +
+			String sql1 = "UPDATE PERSON SET FIRST_NAME = ?, LAST_NAME= ?, ADDR_LINE_1= ?, ADDR_LINE_2= ?, CITY_NAME= ?, STATE_NAME= ?, ZIPCODE= ?, " +
+					"EMAIL_ID= ?, PASSWORD= ?, DATEOFBIRTH= ?, DEPARTMENT= ?  " +
 					"WHERE SJSUID= ? ";
 			
 			PreparedStatement ps1 = conn.prepareStatement(sql1);
@@ -463,7 +463,7 @@ public class PersonDAO {
 			else
 				flag = "No Record Updated";
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		} finally {
 			try {
 				conn.commit();
