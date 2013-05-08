@@ -317,7 +317,8 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="dropCourse">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
+      <element name="sjsu_id" type="xsd:string"/>
+      <element name="name" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>

@@ -79,7 +79,8 @@
         <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://beans.univserver.cmpe273.edu" qname="pns:studentCourse" type="tns:StudentCourse"/>
       </operation>
       <operation xmlns:operNS="http://service.univserver.cmpe273.edu" xmlns:retNS="http://service.univserver.cmpe273.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="dropCourse" qname="operNS:dropCourse" returnQName="retNS:dropCourseReturn" returnType="rtns:string" soapAction="">
-        <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://beans.univserver.cmpe273.edu" qname="pns:studentCourse" type="tns:StudentCourse"/>
+        <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:sjsu_id" type="tns:string"/>
+        <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:name" type="tns:string"/>
       </operation>
       <operation xmlns:operNS="http://service.univserver.cmpe273.edu" xmlns:retNS="http://service.univserver.cmpe273.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="registerUser" qname="operNS:registerUser" returnQName="retNS:registerUserReturn" returnType="rtns:string" soapAction="">
         <parameter xmlns:pns="http://service.univserver.cmpe273.edu" xmlns:tns="http://beans.univserver.cmpe273.edu" qname="pns:person" type="tns:Person"/>

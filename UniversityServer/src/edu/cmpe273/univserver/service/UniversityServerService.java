@@ -10,8 +10,10 @@ import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.beans.StudentCourse;
 import edu.cmpe273.univserver.dao.CourseDAO;
 import edu.cmpe273.univserver.dao.InstructorCourseDAO;
+import edu.cmpe273.univserver.dao.MyClass;
 import edu.cmpe273.univserver.dao.PersonDAO;
 import edu.cmpe273.univserver.dao.SearchCourseDAO;
+import edu.cmpe273.univserver.dao.Student_drop;
 import edu.cmpe273.univserver.validator.RegisterValidator;
 
 @WebService
@@ -58,9 +60,10 @@ public class UniversityServerService {
 		return "";
 	}
 
-	public String dropCourse(StudentCourse[] studentCourse) {
-
-		return "";
+	public String dropCourse(String sjsu_id,String name) 
+	{
+		String del=Student_drop.dropCourse(sjsu_id, name);
+		return del;
 
 	}
 
@@ -179,7 +182,7 @@ public class UniversityServerService {
 	}
 
 	public InstructorCourse[] viewAssignedCourses(String sjsuid) {
-		InstructorCourse[] instructorCourses = null;
+		InstructorCourse[] instructorCourses = MyClass.getInstClass(sjsuid) ;
 
 		return instructorCourses;
 	}

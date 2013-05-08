@@ -14,6 +14,7 @@ public class SearchCourseDAO {
 		Course[] course = null;
 		DatabaseConnection db = null;
 		Connection conn = null;
+		System.out.println("Department and courseNumber in DAO >> "+department+"  "+courseNumber);
 
 		try {
 			db = new DatabaseConnection();
@@ -25,20 +26,20 @@ public class SearchCourseDAO {
 
 			PreparedStatement pstmt = conn.prepareStatement(queryTemp);
 
-			pstmt.setString(1, department);
-			pstmt.setString(2, courseNumber);
+			pstmt.setString(1, courseNumber);
+			pstmt.setString(2, department);
 
 			ResultSet rs = pstmt.executeQuery();
 			int numberOfRows = 0, iCount = 0;
 			while (rs.next()) {
 				numberOfRows++;
-			}
+			}System.out.println("Number of rows>> "+numberOfRows);
 			course = new Course[numberOfRows];
 			rs.beforeFirst();
 
 			while (rs.next()) {
 				Course c = new Course();
-
+				System.out.println(rs.getString("COURSE_NO"));	
 				c.setCourseNumber(rs.getString("COURSE_NO"));
 				c.setCourseName(rs.getString("COURSE_NAME"));
 				c.setSection(rs.getString("SECTION_NO"));
@@ -56,7 +57,6 @@ public class SearchCourseDAO {
 		} finally {
 			db.closeConnection(conn);
 			conn.close();
-			System.out.println("Connection closed");
 		}
 		return course;
 

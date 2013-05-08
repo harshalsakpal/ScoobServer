@@ -239,6 +239,7 @@ public class CourseDAO {
 
 			while (rs.next()) {
 				StudentCourse studentCourse = new StudentCourse();
+				System.out.println(rs.getString("COURSE_NO"));
 				studentCourse.setCourseNumber(rs.getString("COURSE_NO"));
 				studentCourse.setCourseSection(rs.getString("COURSE_SEC"));
 				studentCourse
