@@ -260,6 +260,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="addCourseInBatch">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="co" type="tns1:Course"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCourseInBatchResponse">
+    <complexType>
+     <sequence>
+      <element name="addCourseInBatchReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="testService">
     <complexType/>
    </element>
@@ -303,7 +317,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="addCourse">
     <complexType>
      <sequence>
-      <element name="studentCourse" type="tns1:StudentCourse"/>
+      <element name="sjsuid" type="xsd:string"/>
+      <element name="courseNumber" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+      <element name="section" type="xsd:string"/>
+      <element name="day" type="xsd:string"/>
+      <element name="time" type="xsd:string"/>
+      <element name="location" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
@@ -540,6 +560,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="addCourseInBatchResponse">
+
+      <wsdl:part element="impl:addCourseInBatchResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="listAllProfessorsRequest">
 
       <wsdl:part element="impl:listAllProfessors" name="parameters">
@@ -599,6 +627,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="searchStudentInformationRequest">
 
       <wsdl:part element="impl:searchStudentInformation" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addCourseInBatchRequest">
+
+      <wsdl:part element="impl:addCourseInBatch" name="parameters">
 
       </wsdl:part>
 
@@ -708,17 +744,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="removeCourseFromCartRequest">
+   <wsdl:message name="registerUserRequest">
 
-      <wsdl:part element="impl:removeCourseFromCart" name="parameters">
+      <wsdl:part element="impl:registerUser" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="registerUserRequest">
+   <wsdl:message name="removeCourseFromCartRequest">
 
-      <wsdl:part element="impl:registerUser" name="parameters">
+      <wsdl:part element="impl:removeCourseFromCart" name="parameters">
 
       </wsdl:part>
 
@@ -1085,6 +1121,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:getCourseInvoiceResponse" name="getCourseInvoiceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCourseInBatch">
+
+         <wsdl:input message="impl:addCourseInBatchRequest" name="addCourseInBatchRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addCourseInBatchResponse" name="addCourseInBatchResponse">
 
        </wsdl:output>
 
@@ -1527,6 +1575,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="getCourseInvoiceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCourseInBatch">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addCourseInBatchRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addCourseInBatchResponse">
 
             <wsdlsoap:body use="literal"/>
 

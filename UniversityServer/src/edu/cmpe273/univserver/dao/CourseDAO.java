@@ -98,12 +98,6 @@ public class CourseDAO {
 			return "Course Adding Failure:Duplicate Entry";
 		} finally {
 
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -260,33 +254,80 @@ public class CourseDAO {
 
 	}
 
-	public String Addcourse(StudentCourse course) throws SQLException {
-		String C_NO = course.getCourseNumber();
-		String sjsu_id = course.getSjsuid();
-		String section_no = course.getCourseSection();
+	public String Addcourse(String sjsuid, String courseNumber, String courseName, String section, String day, String time, String location) {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 
-		String sql = "INSERT INTO student_course(SJSU_ID, COURSE_NO, COURSE_SEC, COURSE_DAY," +
-				"COURSE_LOCATION, COURSE_TIME) values (?,?,?,?,?,?)";
-		try {
+			String sql = "INSERT INTO student_course(SJSU_ID, COURSE_NO, COURSE_SEC, COURSE_DAY,"
+					+ "COURSE_LOCATION, COURSE_TIME) values (?,?,?,?,?,?)";
+			try {
 
-			System.out.println("INSIDE ");
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, sjsu_id);
-			ps.setString(2, C_NO);
-			ps.setString(3, section_no);
+				System.out.println("INSIDE ");
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setInt(1, Integer.parseInt(sjsuid));
+				ps.setString(2, courseNumber);
+				ps.setInt(3, Integer.parseInt(section));
+				ps.setString(4, day);
+				ps.setString(5, time);
+				ps.setString(6, location);
 
-			if (ps.executeUpdate() == 1) {
+				if (ps.executeUpdate() == 1) {
+					conn.commit();
+					return "Enrolled Successfully";
+				} else {
+					return "Enrollment Not Successfull";
+				}
+
+			} catch (Exception e) {
+				return "Course Adding Failure:Duplicate Entry";
+			} finally {
+			}
+		}
+	
+	public int addCourseinBatch(Course[] co) {
+		int[] rowcount = new int[1000];
+		PreparedStatement ps = null;
+		DatabaseConnection db = new DatabaseConnection();
+
+		Connection conn = db.getConnection();
+		int size = co.length;
+		int count = 0;
+		int i = 0;
+		// Connection conn = obj.getConnection();
+		if (conn != null) {
+
+			try {
+
+				String sql = "insert into courses(course_no,course_name,course_desc,section_no,credits,department) values(?,?,?,?,?,?)";
+				ps = conn.prepareStatement(sql);
+				for (i = 0; i < co.length; i++) {
+					ps.setString(1, co[i].courseNumber);
+					ps.setString(2, co[i].courseName);
+					ps.setString(3, co[i].courseDesc);
+					ps.setString(4, co[i].section);
+					ps.setString(5, co[i].credits);
+					ps.setString(6, co[i].department);
+					ps.addBatch();
+					if (++count % 1000 == 0) {
+						ps.executeBatch();
+					}
+				}
+
 				conn.commit();
-				return "Enrolled Successfully";
-			} else {
-				return "Enrollment Not Successfull";
+				db.closeConnection(conn);
+
+			} catch (SQLException e) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 			}
 
-		} catch (Exception e) {
-			return "Course Adding Failure:Duplicate Entry";
-		} finally {
 		}
+
+		return i;
 	}
 }

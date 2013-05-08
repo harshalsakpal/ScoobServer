@@ -55,14 +55,14 @@ public class UniversityServerService {
 		return pd.AdminSignIn(username, password);
 	}
 
-	public String addCourse(StudentCourse studentCourse) {
-
-		return "";
+	public String addCourse(String sjsuid, String courseNumber, String courseName, String section, String day, String time, String location) {
+		CourseDAO courseDAO = new CourseDAO();
+		String addCourseReply = courseDAO.Addcourse(sjsuid, courseNumber,courseName,section,day,time,location);
+		return addCourseReply;
 	}
 
-	public String dropCourse(String sjsu_id,String name) 
-	{
-		String del=Student_drop.dropCourse(sjsu_id, name);
+	public String dropCourse(String sjsu_id, String name) {
+		String del = Student_drop.dropCourse(sjsu_id, name);
 		return del;
 
 	}
@@ -182,7 +182,7 @@ public class UniversityServerService {
 	}
 
 	public InstructorCourse[] viewAssignedCourses(String sjsuid) {
-		InstructorCourse[] instructorCourses = MyClass.getInstClass(sjsuid) ;
+		InstructorCourse[] instructorCourses = MyClass.getInstClass(sjsuid);
 
 		return instructorCourses;
 	}
@@ -198,4 +198,10 @@ public class UniversityServerService {
 		CourseDAO courseDAO = new CourseDAO();
 		return courseDAO.getCourseDetails(course);
 	}
+
+	public int addCourseInBatch(Course[] co) {
+		CourseDAO c = new CourseDAO();
+		return c.addCourseinBatch(co);
+	}
+
 }

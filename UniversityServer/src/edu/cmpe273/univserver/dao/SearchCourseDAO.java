@@ -56,7 +56,6 @@ public class SearchCourseDAO {
 			sqle.printStackTrace();
 		} finally {
 			db.closeConnection(conn);
-			conn.close();
 		}
 		return course;
 

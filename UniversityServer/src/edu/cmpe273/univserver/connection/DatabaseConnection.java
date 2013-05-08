@@ -21,7 +21,7 @@ public class DatabaseConnection {
 	private static boolean created = false;
 	private static int poolsize=0;
 	static Connection[] ca = new Connection[MAXPOOLSIZE];
-	static void initialize(){
+	public static void initialize(){
 		if (onConnectionPool) {
 			if (!created) {
 				
