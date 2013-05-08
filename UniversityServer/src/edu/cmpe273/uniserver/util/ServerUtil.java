@@ -40,6 +40,13 @@ public class ServerUtil {
 	public boolean isValidEmail(String input) {
 		return Pattern.matches(regexEmail, input);
 	}
+	
+	public boolean isValidDateFormat(String input) {
+		boolean isValid = false;
+		if(Pattern.matches(regexDate, input) && isValidDate(input))
+			isValid = true;
+		return isValid;
+	}
 
 	public boolean isValidDate(String stringDateFormat) {
 		boolean isvalid = false;
