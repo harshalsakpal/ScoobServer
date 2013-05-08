@@ -33,7 +33,7 @@ public class PersonDAO {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				
+
 			}
 		}
 		return flag;
@@ -48,7 +48,7 @@ public class PersonDAO {
 
 		ResultSet rs;
 		try {
-			String sql="Select * from person where SJSUID=? and password=?";
+			String sql = "Select * from person where SJSUID=? and password=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user);
 			ps.setString(2, pword);
@@ -160,29 +160,30 @@ public class PersonDAO {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 		String sql = "";
-		
+
 		try {
-			PreparedStatement ps = null;	
+			PreparedStatement ps = null;
 			ResultSet resultSet = null;
 			sql = "SELECT SJSUID FROM PERSON WHERE EMAIL_ID = ?";
-			
+
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, person.getEmailid());
 			resultSet = ps.executeQuery();
-			
-			while(resultSet.next()){
-				System.out.println("SJSU ID RETURNED IS :: "+resultSet.getString("SJSUID"));
+
+			while (resultSet.next()) {
+				System.out.println("SJSU ID RETURNED IS :: "
+						+ resultSet.getString("SJSUID"));
 				sjsuid = "Email id already Exists";
 			}
 			resultSet.beforeFirst();
-			
-			if (!resultSet.next()) {			
-				sql = "INSERT INTO PERSON (`FIRST_NAME`,`LAST_NAME`,`ADDR_LINE_1`,`ADDR_LINE_2`,`CITY_NAME`," +
-						"`STATE_NAME`,`ZIPCODE`,`EMAIL_ID`,`PASSWORD`,`DATEOFBIRTH`,`GENDER`,`ROLE`,`CONTACT_NUMBER`,`DEPARTMENT`) " +
-						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-				
+
+			if (!resultSet.next()) {
+				sql = "INSERT INTO PERSON (`FIRST_NAME`,`LAST_NAME`,`ADDR_LINE_1`,`ADDR_LINE_2`,`CITY_NAME`,"
+						+ "`STATE_NAME`,`ZIPCODE`,`EMAIL_ID`,`PASSWORD`,`DATEOFBIRTH`,`GENDER`,`ROLE`,`CONTACT_NUMBER`,`DEPARTMENT`) "
+						+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
 				ps = conn.prepareStatement(sql);
-				
+
 				ps.setString(1, person.getFirstName());
 				ps.setString(2, person.getLastName());
 				ps.setString(3, person.getAddrLine1());
@@ -197,18 +198,18 @@ public class PersonDAO {
 				ps.setString(12, person.getRole());
 				ps.setString(13, person.getContactNumber());
 				ps.setString(14, person.getDepartment());
-				
+
 				ps.executeUpdate();
-				
+
 				System.out.println("After Executing insert");
-				
+
 				sql = "SELECT SJSUID FROM PERSON WHERE EMAIL_ID = ?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, person.getEmailid());
 				resultSet = ps.executeQuery();
-				
+
 				System.out.println("After Executing Select");
-				while(resultSet.next()){
+				while (resultSet.next()) {
 					sjsuid = resultSet.getString("SJSUID");
 				}
 			}
@@ -226,13 +227,209 @@ public class PersonDAO {
 			db.closeConnection(conn);
 
 			try {
-				
+
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return sjsuid;
+	}
+
+	public String deleteStudentInformation(String sjsuid) {
+		String flag = "Record Was Not Deleted";
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn = db.getConnection();
+		try {
+			String sql1 = "DELETE FROM PERSON WHERE SJSUID= ? AND ROLE = 'STUEDNT'";
+			PreparedStatement ps1 = conn.prepareStatement(sql1);
+			ps1.setString(1, sjsuid);
+
+			String sql2 = "DELETE FROM STUDENT_COURSE SJSU_ID= ? ROLE = 'STUEDNT'";
+			PreparedStatement ps2 = conn.prepareStatement(sql2);
+			ps2.setString(1, sjsuid);
+
+			if (ps1.executeUpdate() == 1 || ps2.executeUpdate() == 1)
+				flag = "Record Deleted Successfully";
+			else
+				flag = "No Record Found";
+		} catch (Exception e) {
+
+		} finally {
+			try {
+				conn.commit();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			db.closeConnection(conn);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+
+			}
+		}
+		return flag;
+
+	}
+
+	public String deleteProfessorInformation(String sjsuid) {
+		String flag = "Record Was Not Deleted";
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn = db.getConnection();
+		try {
+			String sql1 = "DELETE FROM PERSON WHERE SJSUID = ? AND ROLE = 'INSTRUCTOR'";
+			PreparedStatement ps1 = conn.prepareStatement(sql1);
+			ps1.setString(1, sjsuid);
+
+			String sql2 = "DELETE FROM INSTRUCTOR_COURSE WHERE SJSUID = ? AND ROLE = 'INSTRUCTOR'";
+			PreparedStatement ps2 = conn.prepareStatement(sql2);
+			ps2.setString(1, sjsuid);
+
+			String sql3 = "DELETE FROM INSTRUCTOR WHERE SJSU_ID = ? AND ROLE = 'INSTRUCTOR'";
+			PreparedStatement ps3 = conn.prepareStatement(sql3);
+			ps3.setString(1, sjsuid);
+
+			if (ps1.executeUpdate() == 1 || ps2.executeUpdate() == 1
+					|| ps3.executeUpdate() == 1)
+				flag = "Record Deleted Successfully";
+			else
+				flag = "No Record Found";
+
+		} catch (Exception e) {
+
+		} finally {
+			try {
+				conn.commit();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			db.closeConnection(conn);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+
+			}
+		}
+		return flag;
+
+	}
+
+	public Person getStudentInformation(String sjsuid) {
+
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn = db.getConnection();
+		Person p = null;
+
+		ResultSet rs;
+		try {
+			String sql = "Select * from person where SJSUID=? And Role = 'STUDENT'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, sjsuid);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				p = new Person();
+				p.setSjsuid(Integer.toString(rs.getInt(1)));
+				p.setFirstName(rs.getString(2));
+				p.setLastName(rs.getString(3));
+				p.setAddrLine1(rs.getString(4));
+				p.setAddrLine2(rs.getString(5));
+				p.setCityName(rs.getString(6));
+				p.setStateName(rs.getString(7));
+				p.setZipCode(rs.getString(8));
+				p.setEmailid(rs.getString(9));
+				p.setPassword(rs.getString(10));
+				p.setDateOfBirth(rs.getString(11));
+				p.setGender(rs.getString(12));
+				//p.setRole(rs.getString(13));
+				// p.setContactNumber(rs.getString(14));
+				p.setDepartment(rs.getString(15));
+				// return p;
+			} else {
+				p = null;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			p = null;
+		} finally {
+			try {
+				conn.commit();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			db.closeConnection(conn);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+
+			}
+		}
+		return p;
+	}
+	
+	public Person getProfessorInformation(String sjsuid) {
+
+		DatabaseConnection db = new DatabaseConnection();
+		Connection conn = db.getConnection();
+		Person p = null;
+
+		ResultSet rs;
+		try {
+			String sql = "Select * from person where SJSUID=? And Role = 'INSTRUCTOR'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, sjsuid);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				p = new Person();
+				p.setSjsuid(Integer.toString(rs.getInt(1)));
+				p.setFirstName(rs.getString(2));
+				p.setLastName(rs.getString(3));
+				p.setAddrLine1(rs.getString(4));
+				p.setAddrLine2(rs.getString(5));
+				p.setCityName(rs.getString(6));
+				p.setStateName(rs.getString(7));
+				p.setZipCode(rs.getString(8));
+				p.setEmailid(rs.getString(9));
+				p.setPassword(rs.getString(10));
+				p.setDateOfBirth(rs.getString(11));
+				p.setGender(rs.getString(12));
+				//p.setRole(rs.getString(13));
+				// p.setContactNumber(rs.getString(14));
+				p.setDepartment(rs.getString(15));
+				// return p;
+			} else {
+				p = null;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			p = null;
+		} finally {
+			try {
+				conn.commit();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			db.closeConnection(conn);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+
+			}
+		}
+		return p;
 	}
 
 }

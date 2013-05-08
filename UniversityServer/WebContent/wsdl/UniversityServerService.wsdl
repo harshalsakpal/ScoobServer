@@ -5,6 +5,69 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://service.univserver.cmpe273.edu" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://beans.univserver.cmpe273.edu"/>
+   <element name="testService">
+    <complexType/>
+   </element>
+   <element name="testServiceResponse">
+    <complexType>
+     <sequence>
+      <element name="testServiceReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editCourseAssignedToAProfessor">
+    <complexType/>
+   </element>
+   <element name="editCourseAssignedToAProfessorResponse">
+    <complexType>
+     <sequence>
+      <element name="editCourseAssignedToAProfessorReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="dropCourse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="dropCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="dropCourseReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCourse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="addCourseReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="signIn">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="signInResponse">
+    <complexType>
+     <sequence>
+      <element name="signInReturn" type="tns1:Person"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="registerUser">
     <complexType>
      <sequence>
@@ -12,50 +75,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-<<<<<<< HEAD
-   <element name="getCourseInvoice">
-=======
    <element name="registerUserResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
     <complexType>
      <sequence>
       <element name="registerUserReturn" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-<<<<<<< HEAD
-   <element name="getCourseInvoiceResponse">
+   <element name="adminSignIn">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="getCourseInvoiceReturn" type="tns1:StudentCourse"/>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="getCourseDetails">
+   <element name="adminSignInResponse">
     <complexType>
      <sequence>
-      <element name="course" type="tns1:Course"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getCourseDetailsResponse">
-    <complexType>
-     <sequence>
-      <element name="getCourseDetailsReturn" type="tns1:Course"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="viewAssignedCourses">
-    <complexType>
-     <sequence>
-      <element name="sjsuid" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="viewAssignedCoursesResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="viewAssignedCoursesReturn" type="tns1:InstructorCourse"/>
+      <element name="adminSignInReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -70,6 +108,34 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="editProfessorInformationReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchStudentInformation">
+    <complexType>
+     <sequence>
+      <element name="input" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchStudentInformationResponse">
+    <complexType>
+     <sequence>
+      <element name="searchStudentInformationReturn" type="tns1:Person"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchInstructorInformation">
+    <complexType>
+     <sequence>
+      <element name="input" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchInstructorInformationResponse">
+    <complexType>
+     <sequence>
+      <element name="searchInstructorInformationReturn" type="tns1:Person"/>
      </sequence>
     </complexType>
    </element>
@@ -127,112 +193,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="assignCourseToAProfessorReturn" type="xsd:string"/>
-=======
-   <element name="adminSignIn">
-    <complexType>
-     <sequence>
-      <element name="username" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminSignInResponse">
-    <complexType>
-     <sequence>
-      <element name="adminSignInReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="dropCourse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="dropCourseResponse">
-    <complexType>
-     <sequence>
-      <element name="dropCourseReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="addCourse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="addCourseResponse">
-    <complexType>
-     <sequence>
-      <element name="addCourseReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="signIn">
-    <complexType>
-     <sequence>
-      <element name="username" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="signInResponse">
-    <complexType>
-     <sequence>
-      <element name="signInReturn" type="tns1:Person"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editCourseAssignedToAProfessor">
-    <complexType/>
-   </element>
-   <element name="editCourseAssignedToAProfessorResponse">
-    <complexType>
-     <sequence>
-      <element name="editCourseAssignedToAProfessorReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="testService">
-    <complexType/>
-   </element>
-   <element name="testServiceResponse">
-    <complexType>
-     <sequence>
-      <element name="testServiceReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="viewRegisteredCourse">
-    <complexType>
-     <sequence>
-      <element name="sjsuid" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="viewRegisteredCourseResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="viewRegisteredCourseReturn" type="tns1:StudentCourse"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="searchAllCourses">
-    <complexType>
-     <sequence>
-      <element name="category" type="xsd:string"/>
-      <element name="input" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="searchAllCoursesResponse">
-    <complexType>
-     <sequence>
-      <element name="searchAllCoursesReturn" type="tns1:Course"/>
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
      </sequence>
     </complexType>
    </element>
@@ -246,7 +206,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-<<<<<<< HEAD
    <element name="listAllPersons">
     <complexType/>
    </element>
@@ -281,6 +240,34 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="adminDeleteCourse">
+    <complexType>
+     <sequence>
+      <element name="course" type="tns1:Course"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="adminDeleteCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="adminDeleteCourseReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="adminAddCourse">
+    <complexType>
+     <sequence>
+      <element name="course" type="tns1:Course"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="adminAddCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="adminAddCourseReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="searchAllCourses">
     <complexType>
      <sequence>
@@ -296,11 +283,62 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="removeCourseFromCart">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeCourseFromCartResponse">
+    <complexType>
+     <sequence>
+      <element name="removeCourseFromCartReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCourseToCart">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCourseToCartResponse">
+    <complexType>
+     <sequence>
+      <element name="addCourseToCartReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="viewRegisteredCourse">
     <complexType>
      <sequence>
       <element name="sjsuid" type="xsd:string"/>
-=======
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewRegisteredCourseResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="viewRegisteredCourseReturn" type="tns1:StudentCourse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewAssignedCourses">
+    <complexType>
+     <sequence>
+      <element name="sjsuid" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewAssignedCoursesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="viewAssignedCoursesReturn" type="tns1:InstructorCourse"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="getCourseInvoice">
     <complexType>
      <sequence>
@@ -315,216 +353,33 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="removeCourseFromCart">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeCourseFromCartResponse">
-    <complexType>
-     <sequence>
-      <element name="removeCourseFromCartReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminAddCourse">
+   <element name="getCourseDetails">
     <complexType>
      <sequence>
       <element name="course" type="tns1:Course"/>
      </sequence>
     </complexType>
    </element>
-   <element name="adminAddCourseResponse">
+   <element name="getCourseDetailsResponse">
     <complexType>
      <sequence>
-      <element name="adminAddCourseReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminDeleteCourse">
-    <complexType>
-     <sequence>
-      <element name="course_number" type="xsd:int"/>
-      <element name="dept" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminDeleteCourseResponse">
-    <complexType>
-     <sequence>
-      <element name="adminDeleteCourseReturn" type="xsd:string"/>
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-     </sequence>
-    </complexType>
-   </element>
-   <element name="viewRegisteredCourseResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="viewRegisteredCourseReturn" type="tns1:StudentCourse"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminDeleteCourse">
-    <complexType>
-     <sequence>
-      <element name="course" type="tns1:Course"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminDeleteCourseResponse">
-    <complexType>
-     <sequence>
-      <element name="adminDeleteCourseReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminAddCourse">
-    <complexType>
-     <sequence>
-      <element name="course" type="tns1:Course"/>
-     </sequence>
-    </complexType>
-   </element>
-<<<<<<< HEAD
-   <element name="adminAddCourseResponse">
-    <complexType>
-     <sequence>
-      <element name="adminAddCourseReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeCourseFromCart">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeCourseFromCartResponse">
-    <complexType>
-     <sequence>
-      <element name="removeCourseFromCartReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="addCourseToCart">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="addCourseToCartResponse">
-    <complexType>
-     <sequence>
-      <element name="addCourseToCartReturn" type="xsd:string"/>
-=======
-   <element name="editStudentInformation">
-    <complexType>
-     <sequence>
-      <element name="person" type="tns1:Person"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editStudentInformationResponse">
-    <complexType>
-     <sequence>
-      <element name="editStudentInformationReturn" type="xsd:string"/>
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-     </sequence>
-    </complexType>
-   </element>
-   <element name="assignCourseToAProfessor">
-    <complexType/>
-   </element>
-   <element name="assignCourseToAProfessorResponse">
-    <complexType>
-     <sequence>
-      <element name="assignCourseToAProfessorReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminEditCourse">
-    <complexType>
-     <sequence>
-      <element name="course_number" type="xsd:int"/>
-      <element name="dept" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="adminEditCourseResponse">
-    <complexType>
-     <sequence>
-      <element name="adminEditCourseReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="listAllPersons">
-    <complexType/>
-   </element>
-   <element name="listAllPersonsResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="listAllPersonsReturn" type="tns1:Person"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="listAllStudents">
-    <complexType/>
-   </element>
-   <element name="listAllStudentsResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="listAllStudentsReturn" type="tns1:Person"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="deleteStudentInformation">
-    <complexType>
-     <sequence>
-      <element name="person" type="tns1:Person"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="deleteStudentInformationResponse">
-    <complexType>
-     <sequence>
-      <element name="deleteStudentInformationReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="deleteProfessorInformation">
-    <complexType>
-     <sequence>
-      <element name="person" type="tns1:Person"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="deleteProfessorInformationResponse">
-    <complexType>
-     <sequence>
-      <element name="deleteProfessorInformationReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="addCourseToCart">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="studentCourse" type="tns1:StudentCourse"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="addCourseToCartResponse">
-    <complexType>
-     <sequence>
-      <element name="addCourseToCartReturn" type="xsd:string"/>
+      <element name="getCourseDetailsReturn" type="tns1:Course"/>
      </sequence>
     </complexType>
    </element>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://beans.univserver.cmpe273.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="StudentCourse">
+    <sequence>
+     <element name="courseDay" nillable="true" type="xsd:string"/>
+     <element name="courseLocation" nillable="true" type="xsd:string"/>
+     <element name="courseNumber" nillable="true" type="xsd:string"/>
+     <element name="courseProfessor" nillable="true" type="xsd:string"/>
+     <element name="courseSection" nillable="true" type="xsd:string"/>
+     <element name="courseTime" nillable="true" type="xsd:string"/>
+     <element name="sjsuid" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
    <complexType name="Person">
     <sequence>
      <element name="addrLine1" nillable="true" type="xsd:string"/>
@@ -542,17 +397,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="sjsuid" nillable="true" type="xsd:string"/>
      <element name="stateName" nillable="true" type="xsd:string"/>
      <element name="zipCode" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-   <complexType name="StudentCourse">
-    <sequence>
-     <element name="courseDay" nillable="true" type="xsd:string"/>
-     <element name="courseLocation" nillable="true" type="xsd:string"/>
-     <element name="courseNumber" nillable="true" type="xsd:string"/>
-     <element name="courseProfessor" nillable="true" type="xsd:string"/>
-     <element name="courseSection" nillable="true" type="xsd:string"/>
-     <element name="courseTime" nillable="true" type="xsd:string"/>
-     <element name="sjsuid" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
    <complexType name="Course">
@@ -577,45 +421,12 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="time" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
-<<<<<<< HEAD
-   <complexType name="Person">
-    <sequence>
-     <element name="addrLine1" nillable="true" type="xsd:string"/>
-     <element name="addrLine2" nillable="true" type="xsd:string"/>
-     <element name="cityName" nillable="true" type="xsd:string"/>
-     <element name="contactNumber" nillable="true" type="xsd:string"/>
-     <element name="dateOfBirth" nillable="true" type="xsd:string"/>
-     <element name="department" nillable="true" type="xsd:string"/>
-     <element name="emailid" nillable="true" type="xsd:string"/>
-     <element name="firstName" nillable="true" type="xsd:string"/>
-     <element name="gender" nillable="true" type="xsd:string"/>
-     <element name="lastName" nillable="true" type="xsd:string"/>
-     <element name="password" nillable="true" type="xsd:string"/>
-     <element name="role" nillable="true" type="xsd:string"/>
-     <element name="sjsuid" nillable="true" type="xsd:string"/>
-     <element name="stateName" nillable="true" type="xsd:string"/>
-     <element name="zipCode" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-=======
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
   </schema>
  </wsdl:types>
 
    <wsdl:message name="adminEditCourseRequest">
-<<<<<<< HEAD
-=======
 
       <wsdl:part element="impl:adminEditCourse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="dropCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-      <wsdl:part element="impl:dropCourseResponse" name="parameters">
 
       </wsdl:part>
 
@@ -629,37 +440,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="listAllStudentsResponse">
-
-      <wsdl:part element="impl:listAllStudentsResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-<<<<<<< HEAD
-   <wsdl:message name="listAllStudentsResponse">
-
-      <wsdl:part element="impl:listAllStudentsResponse" name="parameters">
-=======
-   <wsdl:message name="assignCourseToAProfessorResponse">
-
-      <wsdl:part element="impl:assignCourseToAProfessorResponse" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-<<<<<<< HEAD
-   <wsdl:message name="assignCourseToAProfessorResponse">
-
-      <wsdl:part element="impl:assignCourseToAProfessorResponse" name="parameters">
-=======
    <wsdl:message name="testServiceResponse">
 
       <wsdl:part element="impl:testServiceResponse" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="assignCourseToAProfessorResponse">
+
+      <wsdl:part element="impl:assignCourseToAProfessorResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listAllStudentsResponse">
+
+      <wsdl:part element="impl:listAllStudentsResponse" name="parameters">
 
       </wsdl:part>
 
@@ -668,17 +467,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="viewRegisteredCourseResponse">
 
       <wsdl:part element="impl:viewRegisteredCourseResponse" name="parameters">
-<<<<<<< HEAD
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="listAllPersonsRequest">
-
-      <wsdl:part element="impl:listAllPersons" name="parameters">
-=======
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
       </wsdl:part>
 
@@ -780,6 +568,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="searchInstructorInformationRequest">
+
+      <wsdl:part element="impl:searchInstructorInformation" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="viewAssignedCoursesRequest">
 
       <wsdl:part element="impl:viewAssignedCourses" name="parameters">
@@ -788,29 +584,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-<<<<<<< HEAD
    <wsdl:message name="adminEditCourseResponse">
 
       <wsdl:part element="impl:adminEditCourseResponse" name="parameters">
-=======
-   <wsdl:message name="editStudentInformationRequest">
-
-      <wsdl:part element="impl:editStudentInformation" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
       </wsdl:part>
 
    </wsdl:message>
 
-<<<<<<< HEAD
+   <wsdl:message name="searchStudentInformationRequest">
+
+      <wsdl:part element="impl:searchStudentInformation" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="listAllProfessorsResponse">
 
       <wsdl:part element="impl:listAllProfessorsResponse" name="parameters">
-=======
-   <wsdl:message name="adminDeleteCourseResponse">
-
-      <wsdl:part element="impl:adminDeleteCourseResponse" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
       </wsdl:part>
 
@@ -904,29 +696,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-<<<<<<< HEAD
    <wsdl:message name="getCourseInvoiceResponse">
 
       <wsdl:part element="impl:getCourseInvoiceResponse" name="parameters">
-=======
-   <wsdl:message name="adminEditCourseResponse">
-
-      <wsdl:part element="impl:adminEditCourseResponse" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-<<<<<<< HEAD
-   <wsdl:message name="removeCourseFromCartRequest">
-
-      <wsdl:part element="impl:removeCourseFromCart" name="parameters">
-=======
-   <wsdl:message name="viewAssignedCoursesRequest">
-
-      <wsdl:part element="impl:viewAssignedCourses" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
       </wsdl:part>
 
@@ -935,6 +707,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="registerUserRequest">
 
       <wsdl:part element="impl:registerUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeCourseFromCartRequest">
+
+      <wsdl:part element="impl:removeCourseFromCart" name="parameters">
 
       </wsdl:part>
 
@@ -972,17 +752,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="editCourseAssignedToAProfessorRequest">
+   <wsdl:message name="deleteProfessorInformationRequest">
 
-      <wsdl:part element="impl:editCourseAssignedToAProfessor" name="parameters">
+      <wsdl:part element="impl:deleteProfessorInformation" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="deleteProfessorInformationRequest">
+   <wsdl:message name="editCourseAssignedToAProfessorRequest">
 
-      <wsdl:part element="impl:deleteProfessorInformation" name="parameters">
+      <wsdl:part element="impl:editCourseAssignedToAProfessor" name="parameters">
 
       </wsdl:part>
 
@@ -996,43 +776,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-<<<<<<< HEAD
    <wsdl:message name="addCourseToCartRequest">
 
       <wsdl:part element="impl:addCourseToCart" name="parameters">
-=======
-   <wsdl:message name="editProfessorInformationRequest">
-
-      <wsdl:part element="impl:editProfessorInformation" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
       </wsdl:part>
 
    </wsdl:message>
 
-<<<<<<< HEAD
    <wsdl:message name="dropCourseRequest">
 
       <wsdl:part element="impl:dropCourse" name="parameters">
-=======
-   <wsdl:message name="signInRequest">
-
-      <wsdl:part element="impl:signIn" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
       </wsdl:part>
 
    </wsdl:message>
 
-<<<<<<< HEAD
    <wsdl:message name="searchAllCoursesRequest">
 
       <wsdl:part element="impl:searchAllCourses" name="parameters">
-=======
-   <wsdl:message name="listAllPersonsResponse">
-
-      <wsdl:part element="impl:listAllPersonsResponse" name="parameters">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
       </wsdl:part>
 
@@ -1062,9 +824,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="addCourseRequest">
+   <wsdl:message name="searchStudentInformationResponse">
 
-      <wsdl:part element="impl:addCourse" name="parameters">
+      <wsdl:part element="impl:searchStudentInformationResponse" name="parameters">
 
       </wsdl:part>
 
@@ -1086,7 +848,75 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="searchInstructorInformationResponse">
+
+      <wsdl:part element="impl:searchInstructorInformationResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:portType name="UniversityServerService">
+
+      <wsdl:operation name="testService">
+
+         <wsdl:input message="impl:testServiceRequest" name="testServiceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:testServiceResponse" name="testServiceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editCourseAssignedToAProfessor">
+
+         <wsdl:input message="impl:editCourseAssignedToAProfessorRequest" name="editCourseAssignedToAProfessorRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editCourseAssignedToAProfessorResponse" name="editCourseAssignedToAProfessorResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="dropCourse">
+
+         <wsdl:input message="impl:dropCourseRequest" name="dropCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:dropCourseResponse" name="dropCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCourse">
+
+         <wsdl:input message="impl:addCourseRequest" name="addCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addCourseResponse" name="addCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="signIn">
+
+         <wsdl:input message="impl:signInRequest" name="signInRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:signInResponse" name="signInResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="registerUser">
 
@@ -1100,15 +930,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
-      <wsdl:operation name="getCourseInvoice">
-
-         <wsdl:input message="impl:getCourseInvoiceRequest" name="getCourseInvoiceRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getCourseInvoiceResponse" name="getCourseInvoiceResponse">
-=======
       <wsdl:operation name="adminSignIn">
 
          <wsdl:input message="impl:adminSignInRequest" name="adminSignInRequest">
@@ -1116,57 +937,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:adminSignInResponse" name="adminSignInResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
-      <wsdl:operation name="getCourseDetails">
-
-         <wsdl:input message="impl:getCourseDetailsRequest" name="getCourseDetailsRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getCourseDetailsResponse" name="getCourseDetailsResponse">
-=======
-      <wsdl:operation name="dropCourse">
-
-         <wsdl:input message="impl:dropCourseRequest" name="dropCourseRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:dropCourseResponse" name="dropCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-<<<<<<< HEAD
-      <wsdl:operation name="viewAssignedCourses">
-
-         <wsdl:input message="impl:viewAssignedCoursesRequest" name="viewAssignedCoursesRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:viewAssignedCoursesResponse" name="viewAssignedCoursesResponse">
-=======
-      <wsdl:operation name="addCourse">
-
-         <wsdl:input message="impl:addCourseRequest" name="addCourseRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:addCourseResponse" name="addCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-<<<<<<< HEAD
       <wsdl:operation name="editProfessorInformation">
 
          <wsdl:input message="impl:editProfessorInformationRequest" name="editProfessorInformationRequest">
@@ -1174,21 +949,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:editProfessorInformationResponse" name="editProfessorInformationResponse">
-=======
-      <wsdl:operation name="signIn">
-
-         <wsdl:input message="impl:signInRequest" name="signInRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:signInResponse" name="signInResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
+      <wsdl:operation name="searchStudentInformation">
+
+         <wsdl:input message="impl:searchStudentInformationRequest" name="searchStudentInformationRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchStudentInformationResponse" name="searchStudentInformationResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchInstructorInformation">
+
+         <wsdl:input message="impl:searchInstructorInformationRequest" name="searchInstructorInformationRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchInstructorInformationResponse" name="searchInstructorInformationResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="deleteProfessorInformation">
 
          <wsdl:input message="impl:deleteProfessorInformationRequest" name="deleteProfessorInformationRequest">
@@ -1196,21 +985,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:deleteProfessorInformationResponse" name="deleteProfessorInformationResponse">
-=======
-      <wsdl:operation name="editCourseAssignedToAProfessor">
-
-         <wsdl:input message="impl:editCourseAssignedToAProfessorRequest" name="editCourseAssignedToAProfessorRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:editCourseAssignedToAProfessorResponse" name="editCourseAssignedToAProfessorResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="deleteStudentInformation">
 
          <wsdl:input message="impl:deleteStudentInformationRequest" name="deleteStudentInformationRequest">
@@ -1218,21 +997,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:deleteStudentInformationResponse" name="deleteStudentInformationResponse">
-=======
-      <wsdl:operation name="testService">
-
-         <wsdl:input message="impl:testServiceRequest" name="testServiceRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:testServiceResponse" name="testServiceResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="editStudentInformation">
 
          <wsdl:input message="impl:editStudentInformationRequest" name="editStudentInformationRequest">
@@ -1240,21 +1009,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:editStudentInformationResponse" name="editStudentInformationResponse">
-=======
-      <wsdl:operation name="viewRegisteredCourse">
-
-         <wsdl:input message="impl:viewRegisteredCourseRequest" name="viewRegisteredCourseRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:viewRegisteredCourseResponse" name="viewRegisteredCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="assignCourseToAProfessor">
 
          <wsdl:input message="impl:assignCourseToAProfessorRequest" name="assignCourseToAProfessorRequest">
@@ -1262,15 +1021,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:assignCourseToAProfessorResponse" name="assignCourseToAProfessorResponse">
-=======
-      <wsdl:operation name="searchAllCourses">
-
-         <wsdl:input message="impl:searchAllCoursesRequest" name="searchAllCoursesRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:searchAllCoursesResponse" name="searchAllCoursesResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
@@ -1288,7 +1038,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="listAllPersons">
 
          <wsdl:input message="impl:listAllPersonsRequest" name="listAllPersonsRequest">
@@ -1296,21 +1045,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:listAllPersonsResponse" name="listAllPersonsResponse">
-=======
-      <wsdl:operation name="getCourseInvoice">
-
-         <wsdl:input message="impl:getCourseInvoiceRequest" name="getCourseInvoiceRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getCourseInvoiceResponse" name="getCourseInvoiceResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="listAllStudents">
 
          <wsdl:input message="impl:listAllStudentsRequest" name="listAllStudentsRequest">
@@ -1318,21 +1057,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:listAllStudentsResponse" name="listAllStudentsResponse">
-=======
-      <wsdl:operation name="removeCourseFromCart">
-
-         <wsdl:input message="impl:removeCourseFromCartRequest" name="removeCourseFromCartRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:removeCourseFromCartResponse" name="removeCourseFromCartResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="adminEditCourse">
 
          <wsdl:input message="impl:adminEditCourseRequest" name="adminEditCourseRequest">
@@ -1340,29 +1069,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:adminEditCourseResponse" name="adminEditCourseResponse">
-=======
-      <wsdl:operation name="adminAddCourse">
-
-         <wsdl:input message="impl:adminAddCourseRequest" name="adminAddCourseRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:adminAddCourseResponse" name="adminAddCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
-      <wsdl:operation name="searchAllCourses">
-
-         <wsdl:input message="impl:searchAllCoursesRequest" name="searchAllCoursesRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:searchAllCoursesResponse" name="searchAllCoursesResponse">
-=======
       <wsdl:operation name="adminDeleteCourse">
 
          <wsdl:input message="impl:adminDeleteCourseRequest" name="adminDeleteCourseRequest">
@@ -1370,7 +1081,54 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:adminDeleteCourseResponse" name="adminDeleteCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="adminAddCourse">
+
+         <wsdl:input message="impl:adminAddCourseRequest" name="adminAddCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:adminAddCourseResponse" name="adminAddCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchAllCourses">
+
+         <wsdl:input message="impl:searchAllCoursesRequest" name="searchAllCoursesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchAllCoursesResponse" name="searchAllCoursesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeCourseFromCart">
+
+         <wsdl:input message="impl:removeCourseFromCartRequest" name="removeCourseFromCartRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeCourseFromCartResponse" name="removeCourseFromCartResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCourseToCart">
+
+         <wsdl:input message="impl:addCourseToCartRequest" name="addCourseToCartRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addCourseToCartResponse" name="addCourseToCartResponse">
 
        </wsdl:output>
 
@@ -1388,143 +1146,37 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="adminDeleteCourse">
+      <wsdl:operation name="viewAssignedCourses">
 
-         <wsdl:input message="impl:adminDeleteCourseRequest" name="adminDeleteCourseRequest">
+         <wsdl:input message="impl:viewAssignedCoursesRequest" name="viewAssignedCoursesRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:adminDeleteCourseResponse" name="adminDeleteCourseResponse">
+         <wsdl:output message="impl:viewAssignedCoursesResponse" name="viewAssignedCoursesResponse">
 
        </wsdl:output>
 
       </wsdl:operation>
 
-<<<<<<< HEAD
-      <wsdl:operation name="adminAddCourse">
+      <wsdl:operation name="getCourseInvoice">
 
-         <wsdl:input message="impl:adminAddCourseRequest" name="adminAddCourseRequest">
+         <wsdl:input message="impl:getCourseInvoiceRequest" name="getCourseInvoiceRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:adminAddCourseResponse" name="adminAddCourseResponse">
+         <wsdl:output message="impl:getCourseInvoiceResponse" name="getCourseInvoiceResponse">
 
        </wsdl:output>
 
       </wsdl:operation>
 
-      <wsdl:operation name="removeCourseFromCart">
+      <wsdl:operation name="getCourseDetails">
 
-         <wsdl:input message="impl:removeCourseFromCartRequest" name="removeCourseFromCartRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:removeCourseFromCartResponse" name="removeCourseFromCartResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="addCourseToCart">
-
-         <wsdl:input message="impl:addCourseToCartRequest" name="addCourseToCartRequest">
+         <wsdl:input message="impl:getCourseDetailsRequest" name="getCourseDetailsRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:addCourseToCartResponse" name="addCourseToCartResponse">
-=======
-      <wsdl:operation name="editStudentInformation">
-
-         <wsdl:input message="impl:editStudentInformationRequest" name="editStudentInformationRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:editStudentInformationResponse" name="editStudentInformationResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="assignCourseToAProfessor">
-
-         <wsdl:input message="impl:assignCourseToAProfessorRequest" name="assignCourseToAProfessorRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:assignCourseToAProfessorResponse" name="assignCourseToAProfessorResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="adminEditCourse">
-
-         <wsdl:input message="impl:adminEditCourseRequest" name="adminEditCourseRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:adminEditCourseResponse" name="adminEditCourseResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="listAllPersons">
-
-         <wsdl:input message="impl:listAllPersonsRequest" name="listAllPersonsRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:listAllPersonsResponse" name="listAllPersonsResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="listAllStudents">
-
-         <wsdl:input message="impl:listAllStudentsRequest" name="listAllStudentsRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:listAllStudentsResponse" name="listAllStudentsResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="deleteStudentInformation">
-
-         <wsdl:input message="impl:deleteStudentInformationRequest" name="deleteStudentInformationRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:deleteStudentInformationResponse" name="deleteStudentInformationResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="deleteProfessorInformation">
-
-         <wsdl:input message="impl:deleteProfessorInformationRequest" name="deleteProfessorInformationRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:deleteProfessorInformationResponse" name="deleteProfessorInformationResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="addCourseToCart">
-
-         <wsdl:input message="impl:addCourseToCartRequest" name="addCourseToCartRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:addCourseToCartResponse" name="addCourseToCartResponse">
+         <wsdl:output message="impl:getCourseDetailsResponse" name="getCourseDetailsResponse">
 
        </wsdl:output>
 
@@ -1535,6 +1187,96 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:binding name="UniversityServerServiceSoapBinding" type="impl:UniversityServerService">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="testService">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testServiceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testServiceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editCourseAssignedToAProfessor">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editCourseAssignedToAProfessorRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editCourseAssignedToAProfessorResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="dropCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="dropCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="dropCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="signIn">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="signInRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="signInResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="registerUser">
 
@@ -1554,29 +1296,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
-      <wsdl:operation name="getCourseInvoice">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getCourseInvoiceRequest">
-=======
       <wsdl:operation name="adminSignIn">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="adminSignInRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
-         <wsdl:output name="getCourseInvoiceResponse">
-=======
          <wsdl:output name="adminSignInResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1584,89 +1314,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
-      <wsdl:operation name="getCourseDetails">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getCourseDetailsRequest">
-=======
-      <wsdl:operation name="dropCourse">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="dropCourseRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-<<<<<<< HEAD
-         <wsdl:output name="getCourseDetailsResponse">
-=======
-         <wsdl:output name="dropCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-<<<<<<< HEAD
-      <wsdl:operation name="viewAssignedCourses">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="viewAssignedCoursesRequest">
-=======
-      <wsdl:operation name="addCourse">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="addCourseRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-<<<<<<< HEAD
-         <wsdl:output name="viewAssignedCoursesResponse">
-=======
-         <wsdl:output name="addCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-<<<<<<< HEAD
       <wsdl:operation name="editProfessorInformation">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="editProfessorInformationRequest">
-=======
-      <wsdl:operation name="signIn">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="signInRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
          <wsdl:output name="editProfessorInformationResponse">
-=======
-         <wsdl:output name="signInResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1674,29 +1332,53 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
+      <wsdl:operation name="searchStudentInformation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchStudentInformationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchStudentInformationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchInstructorInformation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchInstructorInformationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchInstructorInformationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="deleteProfessorInformation">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="deleteProfessorInformationRequest">
-=======
-      <wsdl:operation name="editCourseAssignedToAProfessor">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="editCourseAssignedToAProfessorRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
          <wsdl:output name="deleteProfessorInformationResponse">
-=======
-         <wsdl:output name="editCourseAssignedToAProfessorResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1704,29 +1386,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="deleteStudentInformation">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="deleteStudentInformationRequest">
-=======
-      <wsdl:operation name="testService">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="testServiceRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
          <wsdl:output name="deleteStudentInformationResponse">
-=======
-         <wsdl:output name="testServiceResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1734,29 +1404,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="editStudentInformation">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="editStudentInformationRequest">
-=======
-      <wsdl:operation name="viewRegisteredCourse">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="viewRegisteredCourseRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
          <wsdl:output name="editStudentInformationResponse">
-=======
-         <wsdl:output name="viewRegisteredCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1764,29 +1422,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="assignCourseToAProfessor">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="assignCourseToAProfessorRequest">
-=======
-      <wsdl:operation name="searchAllCourses">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="searchAllCoursesRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
          <wsdl:output name="assignCourseToAProfessorResponse">
-=======
-         <wsdl:output name="searchAllCoursesResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1812,29 +1458,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="listAllPersons">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="listAllPersonsRequest">
-=======
-      <wsdl:operation name="getCourseInvoice">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getCourseInvoiceRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
          <wsdl:output name="listAllPersonsResponse">
-=======
-         <wsdl:output name="getCourseInvoiceResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1842,29 +1476,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="listAllStudents">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="listAllStudentsRequest">
-=======
-      <wsdl:operation name="removeCourseFromCart">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="removeCourseFromCartRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
          <wsdl:output name="listAllStudentsResponse">
-=======
-         <wsdl:output name="removeCourseFromCartResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1872,29 +1494,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
       <wsdl:operation name="adminEditCourse">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="adminEditCourseRequest">
-=======
-      <wsdl:operation name="adminAddCourse">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="adminAddCourseRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
          <wsdl:output name="adminEditCourseResponse">
-=======
-         <wsdl:output name="adminAddCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
@@ -1902,29 +1512,89 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
-      <wsdl:operation name="searchAllCourses">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="searchAllCoursesRequest">
-=======
       <wsdl:operation name="adminDeleteCourse">
 
          <wsdlsoap:operation soapAction=""/>
 
          <wsdl:input name="adminDeleteCourseRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
-         <wsdl:output name="searchAllCoursesResponse">
-=======
          <wsdl:output name="adminDeleteCourseResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="adminAddCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="adminAddCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="adminAddCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchAllCourses">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchAllCoursesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchAllCoursesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeCourseFromCart">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeCourseFromCartRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeCourseFromCartResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCourseToCart">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addCourseToCartRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addCourseToCartResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -1950,17 +1620,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="adminDeleteCourse">
+      <wsdl:operation name="viewAssignedCourses">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="adminDeleteCourseRequest">
+         <wsdl:input name="viewAssignedCoursesRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="adminDeleteCourseResponse">
+         <wsdl:output name="viewAssignedCoursesResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -1968,26 +1638,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-<<<<<<< HEAD
-      <wsdl:operation name="adminAddCourse">
+      <wsdl:operation name="getCourseInvoice">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="adminAddCourseRequest">
-=======
-      <wsdl:operation name="editStudentInformation">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="editStudentInformationRequest">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
+         <wsdl:input name="getCourseInvoiceRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-<<<<<<< HEAD
-         <wsdl:output name="adminAddCourseResponse">
+         <wsdl:output name="getCourseInvoiceResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -1995,164 +1656,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="removeCourseFromCart">
+      <wsdl:operation name="getCourseDetails">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="removeCourseFromCartRequest">
+         <wsdl:input name="getCourseDetailsRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="removeCourseFromCartResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="addCourseToCart">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="addCourseToCartRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="addCourseToCartResponse">
-=======
-         <wsdl:output name="editStudentInformationResponse">
->>>>>>> 65c3d005176411c373d13735e1a53d9938dcd33a
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="assignCourseToAProfessor">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="assignCourseToAProfessorRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="assignCourseToAProfessorResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="adminEditCourse">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="adminEditCourseRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="adminEditCourseResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="listAllPersons">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="listAllPersonsRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="listAllPersonsResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="listAllStudents">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="listAllStudentsRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="listAllStudentsResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="deleteStudentInformation">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="deleteStudentInformationRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="deleteStudentInformationResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="deleteProfessorInformation">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="deleteProfessorInformationRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="deleteProfessorInformationResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="addCourseToCart">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="addCourseToCartRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="addCourseToCartResponse">
+         <wsdl:output name="getCourseDetailsResponse">
 
             <wsdlsoap:body use="literal"/>
 
