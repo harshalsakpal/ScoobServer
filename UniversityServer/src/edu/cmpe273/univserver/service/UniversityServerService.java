@@ -7,6 +7,7 @@ import edu.cmpe273.univserver.beans.InstructorCourse;
 import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.beans.StudentCourse;
 import edu.cmpe273.univserver.dao.CourseDAO;
+import edu.cmpe273.univserver.dao.InstructorCourseDAO;
 import edu.cmpe273.univserver.dao.PersonDAO;
 import edu.cmpe273.univserver.validator.RegisterValidator;
 
@@ -124,9 +125,11 @@ public class UniversityServerService {
 	}
 	
 	
-	public String assignCourseToAProfessor(Course c, Person p) {
-
-		return "";
+	public String assignCourseToAProfessor(InstructorCourse ic) {
+		InstructorCourseDAO icd= new InstructorCourseDAO();
+		
+		
+		return icd.AssignCourse(ic);
 	}
 
 	public String editCourseAssignedToAProfessor() {

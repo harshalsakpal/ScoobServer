@@ -1,0 +1,137 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from UniversityServerServiceService WSDL service -->
+
+  <service name="UniversityServerService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.univserver.cmpe273.edu"/>
+      <parameter name="wsdlServiceElement" value="UniversityServerServiceService"/>
+      <parameter name="schemaQualified" value="http://beans.univserver.cmpe273.edu,http://service.univserver.cmpe273.edu"/>
+      <parameter name="wsdlServicePort" value="UniversityServerService"/>
+      <parameter name="className" value="edu.cmpe273.univserver.service.UniversityServerServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="UniversityServerService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="testService" qname="operNS:testService" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:testServiceReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="editCourseAssignedToAProfessor" qname="operNS:editCourseAssignedToAProfessor" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:editCourseAssignedToAProfessorReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="dropCourse" qname="operNS:dropCourse" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:dropCourseReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:studentCourse" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:StudentCourse" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="addCourse" qname="operNS:addCourse" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:addCourseReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:studentCourse" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:StudentCourse" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="signIn" qname="operNS:signIn" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:signInReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Person" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="registerUser" qname="operNS:registerUser" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:registerUserReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:person" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Person" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="adminSignIn" qname="operNS:adminSignIn" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:adminSignInReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="editProfessorInformation" qname="operNS:editProfessorInformation" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:editProfessorInformationReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:person" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Person" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="searchStudentInformation" qname="operNS:searchStudentInformation" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:searchStudentInformationReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Person" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:input" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="searchInstructorInformation" qname="operNS:searchInstructorInformation" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:searchInstructorInformationReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Person" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:input" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deleteProfessorInformation" qname="operNS:deleteProfessorInformation" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:deleteProfessorInformationReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:person" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Person" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="deleteStudentInformation" qname="operNS:deleteStudentInformation" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:deleteStudentInformationReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:person" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Person" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="editStudentInformation" qname="operNS:editStudentInformation" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:editStudentInformationReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:person" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Person" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="assignCourseToAProfessor" qname="operNS:assignCourseToAProfessor" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:assignCourseToAProfessorReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:ic" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:InstructorCourse" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="listAllProfessors" qname="operNS:listAllProfessors" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:listAllProfessorsReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Person" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+      </operation>
+      <operation name="listAllPersons" qname="operNS:listAllPersons" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:listAllPersonsReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Person" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+      </operation>
+      <operation name="listAllStudents" qname="operNS:listAllStudents" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:listAllStudentsReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Person" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+      </operation>
+      <operation name="adminEditCourse" qname="operNS:adminEditCourse" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:adminEditCourseReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:course" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Course" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="adminDeleteCourse" qname="operNS:adminDeleteCourse" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:adminDeleteCourseReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:course" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Course" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="adminAddCourse" qname="operNS:adminAddCourse" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:adminAddCourseReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:course" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Course" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="searchAllCourses" qname="operNS:searchAllCourses" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:searchAllCoursesReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Course" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:category" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:input" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="removeCourseFromCart" qname="operNS:removeCourseFromCart" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:removeCourseFromCartReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:studentCourse" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:StudentCourse" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="addCourseToCart" qname="operNS:addCourseToCart" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:addCourseToCartReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:studentCourse" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:StudentCourse" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <operation name="viewRegisteredCourse" qname="operNS:viewRegisteredCourse" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:viewRegisteredCourseReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:StudentCourse" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:sjsuid" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="viewAssignedCourses" qname="operNS:viewAssignedCourses" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:viewAssignedCoursesReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:InstructorCourse" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:sjsuid" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCourseInvoice" qname="operNS:getCourseInvoice" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:getCourseInvoiceReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:StudentCourse" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:sjsuid" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCourseDetails" qname="operNS:getCourseDetails" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:getCourseDetailsReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Course" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:course" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Course" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <parameter name="allowedMethods" value="deleteStudentInformation viewRegisteredCourse editCourseAssignedToAProfessor getCourseDetails getCourseInvoice testService adminDeleteCourse assignCourseToAProfessor viewAssignedCourses editStudentInformation listAllStudents listAllPersons adminSignIn registerUser deleteProfessorInformation searchInstructorInformation editProfessorInformation addCourse listAllProfessors adminAddCourse addCourseToCart searchStudentInformation adminEditCourse removeCourseFromCart signIn dropCourse searchAllCourses"/>
+
+      <typeMapping
+        xmlns:ns="http://beans.univserver.cmpe273.edu"
+        qname="ns:Course"
+        type="java:edu.cmpe273.univserver.beans.Course"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans.univserver.cmpe273.edu"
+        qname="ns:InstructorCourse"
+        type="java:edu.cmpe273.univserver.beans.InstructorCourse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans.univserver.cmpe273.edu"
+        qname="ns:Person"
+        type="java:edu.cmpe273.univserver.beans.Person"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans.univserver.cmpe273.edu"
+        qname="ns:StudentCourse"
+        type="java:edu.cmpe273.univserver.beans.StudentCourse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
