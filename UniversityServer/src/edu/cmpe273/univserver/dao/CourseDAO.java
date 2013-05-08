@@ -57,12 +57,6 @@ public class CourseDAO {
 			e.printStackTrace();
 		} finally {
 			db.closeConnection(conn);
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 
 		return invoiceReply;
@@ -293,12 +287,6 @@ public class CourseDAO {
 		} catch (Exception e) {
 			return "Course Adding Failure:Duplicate Entry";
 		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
 		}
 	}
 }

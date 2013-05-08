@@ -30,11 +30,6 @@ public class PersonDAO {
 		} finally {
 			db.closeConnection(conn);
 
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
 		}
 		return flag;
 	}
@@ -226,12 +221,6 @@ public class PersonDAO {
 			}
 			db.closeConnection(conn);
 
-			try {
-
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return sjsuid;
 	}
@@ -264,11 +253,6 @@ public class PersonDAO {
 			}
 			db.closeConnection(conn);
 
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
 		}
 		return flag;
 
@@ -308,11 +292,6 @@ public class PersonDAO {
 			}
 			db.closeConnection(conn);
 
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
 		}
 		return flag;
 
@@ -366,11 +345,6 @@ public class PersonDAO {
 			}
 			db.closeConnection(conn);
 
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
 		}
 		return p;
 	}
@@ -423,11 +397,6 @@ public class PersonDAO {
 			}
 			db.closeConnection(conn);
 
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
 		}
 		return p;
 	}
@@ -473,11 +442,6 @@ public class PersonDAO {
 			}
 			db.closeConnection(conn);
 
-			try {
-				conn.close();
-			} catch (SQLException e) {
-
-			}
 		}
 		return flag;
 
