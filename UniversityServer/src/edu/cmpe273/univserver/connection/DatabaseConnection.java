@@ -1,9 +1,12 @@
-
 package edu.cmpe273.univserver.connection;
+
+
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,12 +18,12 @@ public class DatabaseConnection {
 	static String pwd = "root";
 
 	static Queue<Connection> pool = new LinkedList<Connection>();
-	private static final int MAXPOOLSIZE = 40;
-	private static final int MINPOOLSIZE = 30;
+	private static  int MAXPOOLSIZE = 40;
+	private static  int MINPOOLSIZE = 30;
 	private static boolean onConnectionPool = true;
 	private static boolean created = false;
 	private static int poolsize=0;
-	static Connection[] ca = new Connection[MAXPOOLSIZE];
+	private static ArrayList<Connection> ca = new ArrayList<Connection>();
 	public static void initialize(){
 		if (onConnectionPool) {
 			if (!created) {
@@ -28,7 +31,7 @@ public class DatabaseConnection {
 				int i=0;
 				for ( i = 0; i < MINPOOLSIZE; i++) {
 					Connection con=createConnection();
-					ca[i]=con;
+					ca.add(con);
 					pool.add(con);
 					poolsize++;
 				}
@@ -86,31 +89,36 @@ public class DatabaseConnection {
 			else {
 					
 				if (poolsize < MAXPOOLSIZE) {
-					System.out.println("Creating "+(MAXPOOLSIZE-MINPOOLSIZE)+" more connections");
-					for(int j=0;j<MAXPOOLSIZE-MINPOOLSIZE;j++)
-					{	Connection con=createConnection();
-						ca[j+MINPOOLSIZE]=con;
-						pool.add(con);
-						poolsize++;
-					}
+												System.out.println("Creating "+(MAXPOOLSIZE-MINPOOLSIZE)+" more connections");
+												for(int j=0;j<MAXPOOLSIZE-MINPOOLSIZE;j++)
+												{	Connection con=createConnection();
+													ca.add(con);
+													pool.add(con);
+													poolsize++;
+												}
+												
+												conn = pool.poll();
+												//System.out.println("Using the newley created connection"+pool.size());
 					
-					conn = pool.poll();
-					//System.out.println("Using the newley created connection"+pool.size());
-					
-				} else {
-					while (conn == null) {
-						System.out.println("waiting for connection");
-						try {
-							Thread.sleep(500);
-
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						conn = pool.poll();
-					}
+											} else {
+							
+													System.out.println("Creating Connection out of the pool and increasing pool size.....");
+													try {
+														MAXPOOLSIZE++;
+														
+														Connection cnew=createConnection();	
+														
+														
+														ca.add(cnew);
+														pool.add(cnew);
+													} catch (Exception e) {
+														// TODO Auto-generated catch block
+														e.printStackTrace();
+													}
+													conn = pool.poll();
+							
+											}
 				}
-			}
 		}
 		return conn;
 	}
@@ -129,32 +137,19 @@ public class DatabaseConnection {
 
 	public static void releasePool() {
 		
-		
-		
-		try {int i=0;
-				int j=0;
-				for ( i = 0; i < ca.length; i++) {
-					if ((ca[i]==null)){ 
-						
-					}
-					else
-					{	//System.out.println(ca[i].isClosed());
-						ca[i].close();
-						j++;
-					}
-					
-					
-				}
-				System.out.println("Number of Connections Properly Closed "+j);
-				System.out.println(pool.size());
-//				while(pool.size()>0)
-//				{
-//					System.out.println(pool.poll().isClosed());
-//				}
+		for (Connection c : ca) {
+			try { 
+				c.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
+			
+
+		}
+		System.out.println("Number of Connections Properly Closed "+ca.size());
+		System.out.println(pool.size());
+		
 		
 			
 		}
