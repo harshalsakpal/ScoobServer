@@ -58,12 +58,14 @@ public class UniversityServerService {
 	public String addCourse(String sjsuid, String courseNumber, String courseName, String section, String day, String time, String location) {
 		CourseDAO courseDAO = new CourseDAO();
 		String addCourseReply = courseDAO.Addcourse(sjsuid, courseNumber,courseName,section,day,time,location);
+		System.out.println("addCourseReply in service>>> "+addCourseReply);
 		return addCourseReply;
 	}
 
 	public String dropCourse(String sjsu_id, String name,String section) {
 		Student_drop sd= new Student_drop();
 		String del = sd.dropCourse(sjsu_id, name,section);
+		System.out.println("dropCourse in service>>> "+del);
 		return del;
 
 	}

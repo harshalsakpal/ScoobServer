@@ -97,7 +97,7 @@ public class CourseDAO {
 			// e.printStackTrace();
 			return "Course Adding Failure:Duplicate Entry";
 		} finally {
-
+			db.closeConnection(conn);
 		}
 	}
 
@@ -135,6 +135,8 @@ public class CourseDAO {
 			e.printStackTrace();
 
 			return "Failure Try Again!!!";
+		} finally {
+			db.closeConnection(conn);
 		}
 
 	}
@@ -165,9 +167,11 @@ public class CourseDAO {
 
 			// e.printStackTrace();
 			return "Failure:Try Again";
+		}finally{
+			db.closeConnection(conn);
 		}
-
 	}
+		
 
 	public Course getCourseDetails(Course c) {
 		String Dept = c.getDepartment();
@@ -191,7 +195,7 @@ public class CourseDAO {
 				c.setSection(rs.getString(4));
 				c.setCredits(rs.getString(5));
 				c.setDepartment(rs.getString(6));
-				return c;
+
 			} else {
 				return null;
 			}
@@ -199,9 +203,10 @@ public class CourseDAO {
 
 			e.printStackTrace();
 
-		}
-
+		}finally{
+			db.closeConnection(conn);
 		return c;
+		}
 	}
 
 	public static StudentCourse[] ViewCourses(String sjsuid) {
@@ -247,44 +252,46 @@ public class CourseDAO {
 			e.printStackTrace();
 		} finally {
 			db.closeConnection(conn);
-			System.out.println("Connection closed");
 		}
 
 		return course;
 
 	}
 
-	public String Addcourse(String sjsuid, String courseNumber, String courseName, String section, String day, String time, String location) {
+	public String Addcourse(String sjsuid, String courseNumber,
+			String courseName, String section, String day, String time,
+			String location) {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 
-			String sql = "INSERT INTO student_course(SJSU_ID, COURSE_NO, COURSE_SEC, COURSE_DAY,"
-					+ "COURSE_LOCATION, COURSE_TIME) values (?,?,?,?,?,?)";
-			try {
+		String sql = "INSERT INTO student_course(SJSU_ID, COURSE_NO, COURSE_SEC, COURSE_DAY,"
+				+ "COURSE_LOCATION, COURSE_TIME) values (?,?,?,?,?,?)";
+		try {
 
-				System.out.println("INSIDE ");
-				PreparedStatement ps = conn.prepareStatement(sql);
-				ps.setInt(1, Integer.parseInt(sjsuid));
-				ps.setString(2, courseNumber);
-				ps.setInt(3, Integer.parseInt(section));
-				ps.setString(4, day);
-				ps.setString(5, time);
-				ps.setString(6, location);
+			System.out.println("INSIDE ");
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(sjsuid));
+			ps.setString(2, courseNumber);
+			ps.setInt(3, Integer.parseInt(section));
+			ps.setString(4, day);
+			ps.setString(5, time);
+			ps.setString(6, location);
 
-				if (ps.executeUpdate() == 1) {
-					conn.commit();
-					return "Enrolled Successfully";
-				} else {
-					return "Enrollment Not Successfull";
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				return "Course Adding Failure:Duplicate Entry";
-			} finally {
+			if (ps.executeUpdate() == 1) {
+				conn.commit();
+				return "Enrolled Successfully";
+			} else {
+				return "Enrollment Not Successfull";
 			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Course Adding Failure:Duplicate Entry";
+		} finally {
+			db.closeConnection(conn);
 		}
-	
+	}
+
 	public int addCourseinBatch(Course[] co) {
 		int[] rowcount = new int[1000];
 		PreparedStatement ps = null;
