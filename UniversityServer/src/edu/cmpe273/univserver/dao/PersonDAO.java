@@ -248,11 +248,11 @@ public class PersonDAO {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 		try {
-			String sql1 = "DELETE FROM PERSON WHERE SJSUID= ? AND ROLE = 'STUEDNT'";
+			String sql1 = "DELETE FROM PERSON WHERE SJSUID= ? AND ROLE = 'STUDENT'";
 			PreparedStatement ps1 = conn.prepareStatement(sql1);
 			ps1.setString(1, sjsuid);
 
-			String sql2 = "DELETE FROM STUDENT_COURSE SJSU_ID= ? ROLE = 'STUEDNT'";
+			String sql2 = "DELETE FROM STUDENT_COURSE SJSU_ID= ? ";
 			PreparedStatement ps2 = conn.prepareStatement(sql2);
 			ps2.setString(1, sjsuid);
 
@@ -262,7 +262,7 @@ public class PersonDAO {
 			} else
 				flag = "No Record Found";
 		} catch (Exception e) {
-
+				e.printStackTrace();
 		} finally {
 			try {
 				conn.commit();
