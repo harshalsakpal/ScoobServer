@@ -27,7 +27,7 @@ public class InstructorCourseDAO {
 		Connection conn= db .getConnection();
 		if(checkCourse(ic,conn))
 		{
-		return "Course Already Assigned to a Different Instructor";	
+		return "Course Already Assigned to an Instructor";	
 		}
 		else
 		{
@@ -59,7 +59,7 @@ public class InstructorCourseDAO {
 	}
 		private boolean checkCourse(InstructorCourse ic,Connection con)
 		{	
-			String sql= "Select SJSU_ID from Instructor_course where COURSE_NO=? and Department=? and SECTION_NO=? ";
+			String sql= "Select SJSU_ID from Instructor_course where COURSE_NO=? and Department=? and SECTION=? ";
 			
 			try {
 				
