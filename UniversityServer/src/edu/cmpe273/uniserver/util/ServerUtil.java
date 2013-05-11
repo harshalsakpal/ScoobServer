@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+
 public class ServerUtil {
 
 	public static final String regexString = "^[A-Za-z]*";
@@ -16,6 +17,7 @@ public class ServerUtil {
 	public static final String regexDate = "([0-9]{2})\\([0-9]{2})\\([0-9]{4})";
 	public static final String regexAddress = "^[A-Za-z0-9 #/]*";
 	public static final String regexEmail = "^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+.([a-zA-Z])+([a-zA-Z])+";
+	
 
 	public boolean isChar(String input) {
 		return Pattern.matches(regexString, input);
@@ -76,9 +78,5 @@ public class ServerUtil {
 		return isvalid;
 	}
 
-	public static void main(String[] a) {
-		ServerUtil u = new ServerUtil();
-		System.out.println(u.isValidDate("05/07/2013"));
 
-	}
 }
