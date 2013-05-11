@@ -12,7 +12,7 @@ import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class PersonDAO {
-	private static final int CACHESIZE = 75;
+	private static final int CACHESIZE = 1;
 	static	int Personhits = 0;
 	static  int PersonMiss = 0;
 	
@@ -49,10 +49,11 @@ public class PersonDAO {
 		Person p = null;
 
 		ResultSet rs;
+		p=getPersonFromCache(username);
 		
-		if(getPersonFromCache(username)!=null)
+		if(p!=null)
 		{
-			return getPersonFromCache(username);
+			return p;
 		}
 		else
 		{
@@ -225,7 +226,7 @@ public class PersonDAO {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			//e.printStackTrace();
 			return "Registration Unsuccessful";
 		} finally {
 			try {
@@ -246,22 +247,23 @@ public class PersonDAO {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 		try {
-			String sql1 = "DELETE FROM PERSON WHERE SJSUID= ? AND ROLE = 'STUEDNT'";
+			String sql1 = "DELETE FROM PERSON WHERE SJSUID=? AND ROLE ='STUDENT'";
 			PreparedStatement ps1 = conn.prepareStatement(sql1);
 			ps1.setString(1, sjsuid);
 
-			String sql2 = "DELETE FROM STUDENT_COURSE SJSU_ID= ? ROLE = 'STUEDNT'";
+			String sql2 = "DELETE FROM STUDENT_COURSE where SJSU_ID=?";
 			PreparedStatement ps2 = conn.prepareStatement(sql2);
 			ps2.setString(1, sjsuid);
 
 			if (ps1.executeUpdate() == 1 || ps2.executeUpdate() == 1)
+			
 			{	deletePersonFromCache(sjsuid);
 				flag = "Record Deleted Successfully";
 			}
 			else
 				flag = "No Record Found";
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		} finally {
 			try {
 				conn.commit();
@@ -285,11 +287,11 @@ public class PersonDAO {
 			PreparedStatement ps1 = conn.prepareStatement(sql1);
 			ps1.setString(1, sjsuid);
 
-			String sql2 = "DELETE FROM INSTRUCTOR_COURSE WHERE SJSUID = ? AND ROLE = 'INSTRUCTOR'";
+			String sql2 = "DELETE FROM INSTRUCTOR_COURSE WHERE SJSU_ID = ?";
 			PreparedStatement ps2 = conn.prepareStatement(sql2);
 			ps2.setString(1, sjsuid);
 
-			String sql3 = "DELETE FROM INSTRUCTOR WHERE SJSU_ID = ? AND ROLE = 'INSTRUCTOR'";
+			String sql3 = "DELETE FROM INSTRUCTOR WHERE SJSU_ID = ?";
 			PreparedStatement ps3 = conn.prepareStatement(sql3);
 			ps3.setString(1, sjsuid);
 
@@ -304,7 +306,7 @@ public class PersonDAO {
 				flag = "No Record Found";
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		} finally {
 			try {
 				conn.commit();
@@ -327,10 +329,10 @@ public class PersonDAO {
 
 		ResultSet rs;
 		
-			
-			if(getPersonFromCache(sjsuid)!=null)
+			p=getPersonFromCache(sjsuid);
+			if(p!=null)
 			{
-				return getPersonFromCache(sjsuid);
+				return p;
 			}
 			else
 			{
@@ -391,15 +393,15 @@ public class PersonDAO {
 		Person p = null;
 
 		ResultSet rs;
-		
-		if(getPersonFromCache(sjsuid)!=null)
+		p=getPersonFromCache(sjsuid);
+		if(p!=null)
 		{
-			return getPersonFromCache(sjsuid);
+			return p;
 		}
 		else
 		{
 		try {
-			String sql = "Select * from person where SJSUID=? ";
+			String sql = "Select * from person where SJSUID=? And Role = 'INSTRUCTOR'";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, sjsuid);
 			rs = ps.executeQuery();

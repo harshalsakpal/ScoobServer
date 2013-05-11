@@ -214,7 +214,7 @@ public class CourseDAO {
 				c.setSection(rs.getString(4));
 				c.setCredits(rs.getString(5));
 				c.setDepartment(rs.getString(6));
-
+				
 			} else {
 				return null;
 			}
@@ -224,8 +224,9 @@ public class CourseDAO {
 
 		}finally{
 			db.closeConnection(conn);
-		return c;
+		
 		}
+		return c;
 	}
 	}	
 
