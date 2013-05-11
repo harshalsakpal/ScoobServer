@@ -7,16 +7,26 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Map;
 
+import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
+import com.sun.org.apache.xml.internal.security.utils.Base64;
+
 import edu.cmpe273.uniserver.util.Cache;
 import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class PersonDAO {
-	private static final int CACHESIZE = 1;
-	static	int Personhits = 0;
-	static  int PersonMiss = 0;
+
 	
-	Map<String, Person> Personset = Collections.synchronizedMap(new Cache<String, Person>(CACHESIZE));
+	
+
+	private static final int CACHESIZE = 75;
+	static int Personhits = 0;
+	static int PersonMiss = 0;
+
+	Map<String, Person> Personset = Collections
+			.synchronizedMap(new Cache<String, Person>(CACHESIZE));
+
+
 	public boolean AdminSignIn(String username, String password) {
 		boolean flag = false;
 		DatabaseConnection db = new DatabaseConnection();
@@ -25,7 +35,7 @@ public class PersonDAO {
 			String sql = "Select username from admin where username=? and password=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
-			ps.setString(2, password);
+			ps.setString(2, Base64.encode(password.getBytes()));
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				flag = true;
@@ -49,6 +59,7 @@ public class PersonDAO {
 		Person p = null;
 
 		ResultSet rs;
+
 		p=getPersonFromCache(username);
 		
 		if(p!=null)
@@ -57,41 +68,54 @@ public class PersonDAO {
 		}
 		else
 		{
+
+
+		if (getPersonFromCache(username) != null) {
+			return getPersonFromCache(username);
+		} else {
+
 			try {
-		
-			String sql = "Select * from person where SJSUID=? and password=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, user);
-			ps.setString(2, pword);
-			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				p = new Person();
-				p.setSjsuid(Integer.toString(rs.getInt(1)));
-				p.setFirstName(rs.getString(2));
-				p.setLastName(rs.getString(3));
-				p.setAddrLine1(rs.getString(4));
-				p.setAddrLine2(rs.getString(5));
-				p.setCityName(rs.getString(6));
-				p.setStateName(rs.getString(7));
-				p.setZipCode(rs.getString(8));
-				p.setEmailid(rs.getString(9));
-				p.setPassword(rs.getString(10));
-				p.setDateOfBirth(rs.getString(11));
-				p.setGender(rs.getString(12));
-				p.setRole(rs.getString(13));
-				p.setContactNumber(rs.getString(14));
-				p.setDepartment(rs.getString(15));
+				String sql = "Select * from person where SJSUID=? and password=?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, user);
+				ps.setString(2, Base64.encode(pword.getBytes()));
+				rs = ps.executeQuery();
+
+				if (rs.next()) {
+					p = new Person();
+					p.setSjsuid(Integer.toString(rs.getInt(1)));
+					p.setFirstName(rs.getString(2));
+					p.setLastName(rs.getString(3));
+					p.setAddrLine1(rs.getString(4));
+					p.setAddrLine2(rs.getString(5));
+					p.setCityName(rs.getString(6));
+					p.setStateName(rs.getString(7));
+					p.setZipCode(rs.getString(8));
+					p.setEmailid(rs.getString(9));
+					
+					try {
+						p.setPassword(new String(Base64.decode(rs.getString(10)
+								.getBytes())));
+					} catch (Base64DecodingException e) {
+						e.printStackTrace();
+					}
+					p.setDateOfBirth(rs.getString(11));
+					p.setGender(rs.getString(12));
+					p.setRole(rs.getString(13));
+					p.setContactNumber(rs.getString(14));
+					p.setDepartment(rs.getString(15));
+					return p;
+				} else {
+					return null;
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				p = null;
 				return p;
-			} else {
-				return null;
 			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			p = null;
-			return p;
 			}
 		}
 	}
@@ -154,7 +178,7 @@ public class PersonDAO {
 			e.printStackTrace();
 		} finally {
 			db.closeConnection(conn);
-			
+
 		}
 
 		return personReply;
@@ -175,16 +199,14 @@ public class PersonDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, person.getEmailid());
 			resultSet = ps.executeQuery();
-				
-			
+
 			if (resultSet.next()) {
 				System.out.println("SJSU ID RETURNED IS :: "
 						+ resultSet.getString("SJSUID"));
 				sjsuid = "Email id already Exists";
-			}
-			else
+			} else
 
-			 {
+			{
 				sql = "INSERT INTO PERSON (`FIRST_NAME`,`LAST_NAME`,`ADDR_LINE_1`,`ADDR_LINE_2`,`CITY_NAME`,"
 						+ "`STATE_NAME`,`ZIPCODE`,`EMAIL_ID`,`PASSWORD`,`DATEOFBIRTH`,`GENDER`,`ROLE`,`CONTACT_NUMBER`,`DEPARTMENT`) "
 						+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -199,7 +221,7 @@ public class PersonDAO {
 				ps.setString(6, person.getStateName());
 				ps.setString(7, person.getZipCode());
 				ps.setString(8, person.getEmailid());
-				ps.setString(9, person.getPassword());
+				ps.setString(9, Base64.encode(person.getPassword().getBytes()));
 				ps.setString(10, person.getDateOfBirth());
 				ps.setString(11, person.getGender());
 				ps.setString(12, person.getRole());
@@ -216,9 +238,6 @@ public class PersonDAO {
 				ps.setString(1, person.getEmailid());
 				resultSet = ps.executeQuery();
 
-				
-				
-				
 				System.out.println("After Executing Select");
 				if (resultSet.next()) {
 					sjsuid = resultSet.getString("SJSUID");
@@ -231,12 +250,11 @@ public class PersonDAO {
 		} finally {
 			try {
 				db.closeConnection(conn);
-				
+
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
 
 		}
 		return sjsuid;
@@ -247,6 +265,7 @@ public class PersonDAO {
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 		try {
+
 			String sql1 = "DELETE FROM PERSON WHERE SJSUID=? AND ROLE ='STUDENT'";
 			PreparedStatement ps1 = conn.prepareStatement(sql1);
 			ps1.setString(1, sjsuid);
@@ -255,15 +274,20 @@ public class PersonDAO {
 			PreparedStatement ps2 = conn.prepareStatement(sql2);
 			ps2.setString(1, sjsuid);
 
-			if (ps1.executeUpdate() == 1 || ps2.executeUpdate() == 1)
-			
-			{	deletePersonFromCache(sjsuid);
+
+
+			if (ps1.executeUpdate() == 1 || ps2.executeUpdate() == 1) {
+				deletePersonFromCache(sjsuid);
+
 				flag = "Record Deleted Successfully";
-			}
-			else
+			} else
 				flag = "No Record Found";
 		} catch (Exception e) {
+
 			e.printStackTrace();
+
+				e.printStackTrace();
+
 		} finally {
 			try {
 				conn.commit();
@@ -296,13 +320,11 @@ public class PersonDAO {
 			ps3.setString(1, sjsuid);
 
 			if (ps1.executeUpdate() == 1 || ps2.executeUpdate() == 1
-					|| ps3.executeUpdate() == 1)
-				{
+					|| ps3.executeUpdate() == 1) {
 				deletePersonFromCache(sjsuid);
-				
+
 				flag = "Record Deleted Successfully";
-				}
-			else
+			} else
 				flag = "No Record Found";
 
 		} catch (Exception e) {
@@ -328,6 +350,7 @@ public class PersonDAO {
 		Person p = null;
 
 		ResultSet rs;
+
 		
 			p=getPersonFromCache(sjsuid);
 			if(p!=null)
@@ -337,55 +360,64 @@ public class PersonDAO {
 			else
 			{
 				try {
-				String sql = "Select * from person where SJSUID=? And Role = 'STUDENT'";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, sjsuid);
-			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				p = new Person();
-				p.setSjsuid(Integer.toString(rs.getInt(1)));
-				p.setFirstName(rs.getString(2));
-				p.setLastName(rs.getString(3));
-				p.setAddrLine1(rs.getString(4));
-				p.setAddrLine2(rs.getString(5));
-				p.setCityName(rs.getString(6));
-				p.setStateName(rs.getString(7));
-				p.setZipCode(rs.getString(8));
-				p.setEmailid(rs.getString(9));
-				p.setPassword(rs.getString(10));
-				p.setDateOfBirth(rs.getString(11));
-				p.setGender(rs.getString(12));
-				//p.setRole(rs.getString(13));
-				// p.setContactNumber(rs.getString(14));
-				p.setDepartment(rs.getString(15));
-				// return p;
-				return p;
-				} 
-			else {
+
+
+				String sql = "Select * from person where SJSUID=? And Role = 'STUDENT'";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, sjsuid);
+				rs = ps.executeQuery();
+
+				if (rs.next()) {
+					p = new Person();
+					p.setSjsuid(Integer.toString(rs.getInt(1)));
+					p.setFirstName(rs.getString(2));
+					p.setLastName(rs.getString(3));
+					p.setAddrLine1(rs.getString(4));
+					p.setAddrLine2(rs.getString(5));
+					p.setCityName(rs.getString(6));
+					p.setStateName(rs.getString(7));
+					p.setZipCode(rs.getString(8));
+					p.setEmailid(rs.getString(9));
+					try {
+						p.setPassword(new String(Base64.decode(rs.getString(10)
+								.getBytes())));
+					} catch (Base64DecodingException e) {
+						e.printStackTrace();
+					}
+					p.setDateOfBirth(rs.getString(11));
+					p.setGender(rs.getString(12));
+					// p.setRole(rs.getString(13));
+					// p.setContactNumber(rs.getString(14));
+					p.setDepartment(rs.getString(15));
+					// return p;
+					return p;
+				} else {
+					p = null;
+					return p;
+				}
+
+			} 
+				catch (SQLException e) {
+
+				e.printStackTrace();
 				p = null;
 				return p;
-				}
-				
-		} catch (SQLException e) {
-
-						e.printStackTrace();
-						p = null;
-						return p;
-		} 
+					}
+			
 				finally {
-								try {
-									conn.commit();
-								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								db.closeConnection(conn);
+						try {
+							conn.commit();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
-		}
-		
+						db.closeConnection(conn);
+					}
+			}
+				
 	}
-	
+
 	public Person getProfessorInformation(String sjsuid) {
 
 		DatabaseConnection db = new DatabaseConnection();
@@ -393,6 +425,7 @@ public class PersonDAO {
 		Person p = null;
 
 		ResultSet rs;
+
 		p=getPersonFromCache(sjsuid);
 		if(p!=null)
 		{
@@ -406,58 +439,69 @@ public class PersonDAO {
 			ps.setString(1, sjsuid);
 			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				p = new Person();
-				p.setSjsuid(Integer.toString(rs.getInt(1)));
-				p.setFirstName(rs.getString(2));
-				p.setLastName(rs.getString(3));
-				p.setAddrLine1(rs.getString(4));
-				p.setAddrLine2(rs.getString(5));
-				p.setCityName(rs.getString(6));
-				p.setStateName(rs.getString(7));
-				p.setZipCode(rs.getString(8));
-				p.setEmailid(rs.getString(9));
-				p.setPassword(rs.getString(10));
-				p.setDateOfBirth(rs.getString(11));
-				p.setGender(rs.getString(12));
-				//p.setRole(rs.getString(13));
-				// p.setContactNumber(rs.getString(14));
-				p.setDepartment(rs.getString(15));
-				return p;
-			} else {
+				ps.setString(1, sjsuid);
+				rs = ps.executeQuery();
+
+
+				if (rs.next()) {
+					p = new Person();
+					p.setSjsuid(Integer.toString(rs.getInt(1)));
+					p.setFirstName(rs.getString(2));
+					p.setLastName(rs.getString(3));
+					p.setAddrLine1(rs.getString(4));
+					p.setAddrLine2(rs.getString(5));
+					p.setCityName(rs.getString(6));
+					p.setStateName(rs.getString(7));
+					p.setZipCode(rs.getString(8));
+					p.setEmailid(rs.getString(9));
+					
+					try {
+						p.setPassword(new String(Base64.decode(rs.getString(10)
+								.getBytes())));
+					} catch (Base64DecodingException e) {
+						e.printStackTrace();
+					}
+					
+					p.setDateOfBirth(rs.getString(11));
+					p.setGender(rs.getString(12));
+					// p.setRole(rs.getString(13));
+					// p.setContactNumber(rs.getString(14));
+					p.setDepartment(rs.getString(15));
+					return p;
+				} else {
+					p = null;
+					return p;
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 				p = null;
 				return p;
+			} finally {
+				try {
+					conn.commit();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				db.closeConnection(conn);
 			}
+		}
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			p = null;
-			return p;
-		} finally {
-			try {
-				conn.commit();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			db.closeConnection(conn);
-		}
-		}
-		
 	}
 
-	public String editProfessorInformation(Person person){
+	public String editProfessorInformation(Person person) {
 		String flag = "Record Was Not Updated";
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
 		try {
-			//TODO WRITE UPDATE STATEMENT....
-			
-			String sql1 = "UPDATE PERSON SET FIRST_NAME = ?, LAST_NAME= ?, ADDR_LINE_1= ?, ADDR_LINE_2= ?, CITY_NAME= ?, STATE_NAME= ?, ZIPCODE= ?, " +
-					"EMAIL_ID= ?, PASSWORD= ?, DATEOFBIRTH= ?, DEPARTMENT= ?  " +
-					"WHERE SJSUID= ? ";
-			
+			// TODO WRITE UPDATE STATEMENT....
+
+			String sql1 = "UPDATE PERSON SET FIRST_NAME = ?, LAST_NAME= ?, ADDR_LINE_1= ?, ADDR_LINE_2= ?, CITY_NAME= ?, STATE_NAME= ?, ZIPCODE= ?, "
+					+ "EMAIL_ID= ?, PASSWORD= ?, DATEOFBIRTH= ?, DEPARTMENT= ?  "
+					+ "WHERE SJSUID= ? ";
+
 			PreparedStatement ps1 = conn.prepareStatement(sql1);
 			ps1.setString(1, person.getFirstName());
 			ps1.setString(2, person.getLastName());
@@ -467,17 +511,15 @@ public class PersonDAO {
 			ps1.setString(6, person.getStateName());
 			ps1.setString(7, person.getZipCode());
 			ps1.setString(8, person.getEmailid());
-			ps1.setString(9, person.getPassword());
+			ps1.setString(9, Base64.encode(person.getPassword().getBytes()));
 			ps1.setString(10, person.getDateOfBirth());
 			ps1.setString(11, person.getDepartment());
 			ps1.setString(12, person.getSjsuid());
-			
 
-			if (ps1.executeUpdate() == 1 )
-				{flag = "Update Success";
+			if (ps1.executeUpdate() == 1) {
+				flag = "Update Success";
 				insertPersonInCache(person);
-				}
-			else
+			} else
 				flag = "No Record Updated";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -494,38 +536,34 @@ public class PersonDAO {
 		return flag;
 
 	}
-	
 
+	public void insertPersonInCache(Person Person) {
 
-public void insertPersonInCache(Person Person) {
+		Personset.put(Person.getSjsuid(), Person);
+		System.out.println("Person inserted into Cache");
 
-	Personset.put(Person.getSjsuid(), Person);
-	System.out.println("Person inserted into Cache");
+	}
 
-}
+	public Person getPersonFromCache(String sjsuid) {
 
-public Person getPersonFromCache(String sjsuid) {
-
-	Person Person = Personset.get(sjsuid);
-	if (Person != null)
-		{
-		Personhits++;
-		System.out.println("Person found good use of Cache");
+		Person Person = Personset.get(sjsuid);
+		if (Person != null) {
+			Personhits++;
+			System.out.println("Person found good use of Cache");
 		}
-		
-	else
-		{
-		System.out.println("Person Not found in Cache");
-		PersonMiss++;
+
+		else {
+			System.out.println("Person Not found in Cache");
+			PersonMiss++;
 		}
-	return Person;
+		return Person;
 
-}
+	}
 
-public void deletePersonFromCache(String sjsuid) {
+	public void deletePersonFromCache(String sjsuid) {
 
-	Personset.remove(sjsuid);
+		Personset.remove(sjsuid);
 
-}
+	}
 
 }
