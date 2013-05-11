@@ -4,12 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Map;
 
+import edu.cmpe273.uniserver.util.Cache;
 import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class PersonDAO {
-
+	private static final int CACHESIZE = 75;
+	static	int Personhits = 0;
+	static  int PersonMiss = 0;
+	
+	Map<String, Person> Personset = Collections.synchronizedMap(new Cache<String, Person>(CACHESIZE));
 	public boolean AdminSignIn(String username, String password) {
 		boolean flag = false;
 		DatabaseConnection db = new DatabaseConnection();
@@ -42,7 +49,15 @@ public class PersonDAO {
 		Person p = null;
 
 		ResultSet rs;
-		try {
+		
+		if(getPersonFromCache(username)!=null)
+		{
+			return getPersonFromCache(username);
+		}
+		else
+		{
+			try {
+		
 			String sql = "Select * from person where SJSUID=? and password=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user);
@@ -76,8 +91,8 @@ public class PersonDAO {
 			e.printStackTrace();
 			p = null;
 			return p;
+			}
 		}
-
 	}
 
 	public Person[] listAllPersons(String category) {
@@ -159,15 +174,16 @@ public class PersonDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, person.getEmailid());
 			resultSet = ps.executeQuery();
-
-			while (resultSet.next()) {
+				
+			
+			if (resultSet.next()) {
 				System.out.println("SJSU ID RETURNED IS :: "
 						+ resultSet.getString("SJSUID"));
 				sjsuid = "Email id already Exists";
 			}
-			resultSet.beforeFirst();
+			else
 
-			if (!resultSet.next()) {
+			 {
 				sql = "INSERT INTO PERSON (`FIRST_NAME`,`LAST_NAME`,`ADDR_LINE_1`,`ADDR_LINE_2`,`CITY_NAME`,"
 						+ "`STATE_NAME`,`ZIPCODE`,`EMAIL_ID`,`PASSWORD`,`DATEOFBIRTH`,`GENDER`,`ROLE`,`CONTACT_NUMBER`,`DEPARTMENT`) "
 						+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -190,7 +206,8 @@ public class PersonDAO {
 				ps.setString(14, person.getDepartment());
 
 				ps.executeUpdate();
-
+				conn.commit();
+				insertPersonInCache(person);
 				System.out.println("After Executing insert");
 
 				sql = "SELECT SJSUID FROM PERSON WHERE EMAIL_ID = ?";
@@ -198,8 +215,11 @@ public class PersonDAO {
 				ps.setString(1, person.getEmailid());
 				resultSet = ps.executeQuery();
 
+				
+				
+				
 				System.out.println("After Executing Select");
-				while (resultSet.next()) {
+				if (resultSet.next()) {
 					sjsuid = resultSet.getString("SJSUID");
 				}
 			}
@@ -209,12 +229,13 @@ public class PersonDAO {
 			return "Registration Unsuccessful";
 		} finally {
 			try {
-				conn.commit();
-			} catch (SQLException e1) {
+				db.closeConnection(conn);
+				
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			db.closeConnection(conn);
+			
 
 		}
 		return sjsuid;
@@ -234,7 +255,9 @@ public class PersonDAO {
 			ps2.setString(1, sjsuid);
 
 			if (ps1.executeUpdate() == 1 || ps2.executeUpdate() == 1)
+			{	deletePersonFromCache(sjsuid);
 				flag = "Record Deleted Successfully";
+			}
 			else
 				flag = "No Record Found";
 		} catch (Exception e) {
@@ -272,7 +295,11 @@ public class PersonDAO {
 
 			if (ps1.executeUpdate() == 1 || ps2.executeUpdate() == 1
 					|| ps3.executeUpdate() == 1)
+				{
+				deletePersonFromCache(sjsuid);
+				
 				flag = "Record Deleted Successfully";
+				}
 			else
 				flag = "No Record Found";
 
@@ -299,8 +326,16 @@ public class PersonDAO {
 		Person p = null;
 
 		ResultSet rs;
-		try {
-			String sql = "Select * from person where SJSUID=? And Role = 'STUDENT'";
+		
+			
+			if(getPersonFromCache(sjsuid)!=null)
+			{
+				return getPersonFromCache(sjsuid);
+			}
+			else
+			{
+				try {
+				String sql = "Select * from person where SJSUID=? And Role = 'STUDENT'";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, sjsuid);
 			rs = ps.executeQuery();
@@ -323,25 +358,30 @@ public class PersonDAO {
 				// p.setContactNumber(rs.getString(14));
 				p.setDepartment(rs.getString(15));
 				// return p;
-			} else {
+				return p;
+				} 
+			else {
 				p = null;
-			}
-
+				return p;
+				}
+				
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			p = null;
-		} finally {
-			try {
-				conn.commit();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			db.closeConnection(conn);
 
+						e.printStackTrace();
+						p = null;
+						return p;
+		} 
+				finally {
+								try {
+									conn.commit();
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								db.closeConnection(conn);
+						}
 		}
-		return p;
+		
 	}
 	
 	public Person getProfessorInformation(String sjsuid) {
@@ -351,6 +391,13 @@ public class PersonDAO {
 		Person p = null;
 
 		ResultSet rs;
+		
+		if(getPersonFromCache(sjsuid)!=null)
+		{
+			return getPersonFromCache(sjsuid);
+		}
+		else
+		{
 		try {
 			String sql = "Select * from person where SJSUID=? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -374,15 +421,17 @@ public class PersonDAO {
 				//p.setRole(rs.getString(13));
 				// p.setContactNumber(rs.getString(14));
 				p.setDepartment(rs.getString(15));
-				// return p;
+				return p;
 			} else {
 				p = null;
+				return p;
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			p = null;
+			return p;
 		} finally {
 			try {
 				conn.commit();
@@ -391,9 +440,9 @@ public class PersonDAO {
 				e1.printStackTrace();
 			}
 			db.closeConnection(conn);
-
 		}
-		return p;
+		}
+		
 	}
 
 	public String editProfessorInformation(Person person){
@@ -423,7 +472,9 @@ public class PersonDAO {
 			
 
 			if (ps1.executeUpdate() == 1 )
-				flag = "Update Success";
+				{flag = "Update Success";
+				insertPersonInCache(person);
+				}
 			else
 				flag = "No Record Updated";
 		} catch (Exception e) {
@@ -442,5 +493,37 @@ public class PersonDAO {
 
 	}
 	
-	
+
+
+public void insertPersonInCache(Person Person) {
+
+	Personset.put(Person.getSjsuid(), Person);
+	System.out.println("Person inserted into Cache");
+
+}
+
+public Person getPersonFromCache(String sjsuid) {
+
+	Person Person = Personset.get(sjsuid);
+	if (Person != null)
+		{
+		Personhits++;
+		System.out.println("Person found good use of Cache");
+		}
+		
+	else
+		{
+		System.out.println("Person Not found in Cache");
+		PersonMiss++;
+		}
+	return Person;
+
+}
+
+public void deletePersonFromCache(String sjsuid) {
+
+	Personset.remove(sjsuid);
+
+}
+
 }

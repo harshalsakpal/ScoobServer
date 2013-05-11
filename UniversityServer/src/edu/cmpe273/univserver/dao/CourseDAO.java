@@ -4,13 +4,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Map;
 
+import edu.cmpe273.uniserver.util.Cache;
 import edu.cmpe273.univserver.beans.Course;
 import edu.cmpe273.univserver.beans.StudentCourse;
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class CourseDAO {
-
+	private static final int CACHESIZE = 75;
+	
+	static int courseHits = 0;
+	static	int courseMiss = 0;
+	Map<String, Course> courseset = Collections.synchronizedMap(new Cache<String, Course>(CACHESIZE));
+	
 	public StudentCourse[] getStudentInvoice(String sjsuid) {
 		StudentCourse[] invoiceReply = null;
 
@@ -86,6 +94,7 @@ public class CourseDAO {
 			ps.setString(6, dept);
 
 			if (ps.executeUpdate() == 1) {
+				insertCourseCache(course);
 				conn.commit();
 				return "Course Added Successfully";
 			} else {
@@ -125,6 +134,7 @@ public class CourseDAO {
 
 			if (ps.executeUpdate() == 1) {
 				System.out.println(sql);
+				insertCourseCache(course);
 				conn.commit();
 				return "Course Edited Successfully";
 			} else {
@@ -155,6 +165,7 @@ public class CourseDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 
 			if (ps.executeUpdate() == 1) {
+				deleteCourseFromCache(c);
 				conn.commit();
 				return "Course Deleted Successfully";
 			} else {
@@ -175,12 +186,20 @@ public class CourseDAO {
 		String section = c.getSection();
 		DatabaseConnection db = new DatabaseConnection();
 		Connection conn = db.getConnection();
-
-		String sql = "Select * from Courses where department='" + Dept
-				+ "' and course_no='" + course_number + "' and section_no='"
-				+ section + "'";
-
+		
+		Course cc=getCourseFromCache(c.getCourseName());
+		if(cc!=null)
+		{
+			return cc;
+		}
+		else
+		{
+			
+		
 		try {
+			String sql = "Select * from Courses where department='" + Dept
+					+ "' and course_no='" + course_number + "' and section_no='"
+					+ section + "'";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -202,6 +221,7 @@ public class CourseDAO {
 		}
 
 		return c;
+		}
 	}
 
 	public static StudentCourse[] ViewCourses(String sjsuid) {
@@ -331,4 +351,34 @@ public class CourseDAO {
 
 		return i;
 	}
+	
+	
+	public void insertCourseCache(Course course) {
+
+		courseset.put(course.getCourseName(), course);
+		
+	}
+
+	public void deleteCourseFromCache(Course course) {
+
+		courseset.remove(course.getCourseName());
+
+	}
+
+	public Course getCourseFromCache(String coursename) {
+
+		Course course = courseset.get(coursename);
+		if (course != null)
+			{courseHits++;
+		System.out.println("Course found good use of Cache");
+			}
+		else
+			{
+			System.out.println("Course Not found in Cache");
+			courseMiss++;
+			}
+		return course;
+
+	}
+
 }
