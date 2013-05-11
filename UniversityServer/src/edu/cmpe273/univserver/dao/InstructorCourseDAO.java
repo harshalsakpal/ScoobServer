@@ -31,7 +31,7 @@ public class InstructorCourseDAO {
 		}
 		else
 		{
-		String sql="insert into instructor_course(department,section_no,course_no,SJSU_ID,DAY,TIME,Location,Available_Seats) values(?,?,?,?,?,?,?,?)";
+		String sql="insert into instructor_course(department, section, course_no, SJSU_ID, DAY, TIME, Location, Available_Seats) values(?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, dept);
