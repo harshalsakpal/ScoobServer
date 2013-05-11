@@ -9,7 +9,7 @@ import edu.cmpe273.univserver.beans.Course;
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class SearchCourseDAO {
-	public static Course[] searchcourses(String department, String courseNumber)
+	static public  Course[] searchcourses(String department, String courseNumber)
 			throws SQLException {
 		Course[] course = null;
 		DatabaseConnection db = null;

@@ -39,7 +39,7 @@ public class Student_drop {
 
 		finally {
 			db.closeConnection(conn);
-			System.out.println("Connection closed");
+			//System.out.println("Connection closed");
 		}
 
 	}
