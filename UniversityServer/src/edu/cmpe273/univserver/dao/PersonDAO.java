@@ -19,11 +19,11 @@ public class PersonDAO {
 	
 	
 
-	private static final int CACHESIZE = 75;
+	private static final int CACHESIZE = 2;
 	static int Personhits = 0;
 	static int PersonMiss = 0;
 
-	Map<String, Person> Personset = Collections
+	static Map<String, Person> Personset = Collections
 			.synchronizedMap(new Cache<String, Person>(CACHESIZE));
 
 
@@ -230,7 +230,7 @@ public class PersonDAO {
 
 				ps.executeUpdate();
 				conn.commit();
-				insertPersonInCache(person);
+				
 				System.out.println("After Executing insert");
 
 				sql = "SELECT SJSUID FROM PERSON WHERE EMAIL_ID = ?";
@@ -241,6 +241,8 @@ public class PersonDAO {
 				System.out.println("After Executing Select");
 				if (resultSet.next()) {
 					sjsuid = resultSet.getString("SJSUID");
+					person.setSjsuid(sjsuid);
+					insertPersonInCache(person);
 				}
 			}
 		} catch (Exception e) {
@@ -538,7 +540,7 @@ public class PersonDAO {
 	}
 
 	public void insertPersonInCache(Person Person) {
-
+		
 		Personset.put(Person.getSjsuid(), Person);
 		System.out.println("Person inserted into Cache");
 
