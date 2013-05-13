@@ -24,91 +24,96 @@
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:service name="UniversityServerService" provider="java:RPC" style="wrapped" use="literal">
   <ns2:operation name="testService" qname="ns1:testService" returnQName="ns1:testServiceReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
-  <ns1:operation name="listAllPersons" qname="ns2:listAllPersons" returnQName="ns2:listAllPersonsReturn" returnType="ns3:Person" soapAction="" xmlns:ns2="http://service.univserver.cmpe273.edu" xmlns:ns3="http://beans.univserver.cmpe273.edu"/>
-  <ns1:operation name="listAllProfessors" qname="ns4:listAllProfessors" returnQName="ns4:listAllProfessorsReturn" returnType="ns5:Person" soapAction="" xmlns:ns4="http://service.univserver.cmpe273.edu" xmlns:ns5="http://beans.univserver.cmpe273.edu"/>
-  <ns1:operation name="editStudentInformation" qname="ns6:editStudentInformation" returnQName="ns6:editStudentInformationReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="editStudentInformation" qname="ns2:editStudentInformation" returnQName="ns2:editStudentInformationReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:person" type="ns3:Person" xmlns:ns3="http://beans.univserver.cmpe273.edu"/>
+  </ns1:operation>
+  <ns1:operation name="deleteStudentInformation" qname="ns4:deleteStudentInformation" returnQName="ns4:deleteStudentInformationReturn" returnType="xsd:string" soapAction="" xmlns:ns4="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns4:person" type="ns5:Person" xmlns:ns5="http://beans.univserver.cmpe273.edu"/>
+  </ns1:operation>
+  <ns1:operation name="deleteProfessorInformation" qname="ns6:deleteProfessorInformation" returnQName="ns6:deleteProfessorInformationReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns6:person" type="ns7:Person" xmlns:ns7="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
-  <ns1:operation name="deleteStudentInformation" qname="ns8:deleteStudentInformation" returnQName="ns8:deleteStudentInformationReturn" returnType="xsd:string" soapAction="" xmlns:ns8="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="editProfessorInformation" qname="ns8:editProfessorInformation" returnQName="ns8:editProfessorInformationReturn" returnType="xsd:string" soapAction="" xmlns:ns8="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns8:person" type="ns9:Person" xmlns:ns9="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
   <ns1:operation name="assignCourseToAProfessor" qname="ns10:assignCourseToAProfessor" returnQName="ns10:assignCourseToAProfessorReturn" returnType="xsd:string" soapAction="" xmlns:ns10="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns10:ic" type="ns11:InstructorCourse" xmlns:ns11="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
-  <ns1:operation name="deleteProfessorInformation" qname="ns12:deleteProfessorInformation" returnQName="ns12:deleteProfessorInformationReturn" returnType="xsd:string" soapAction="" xmlns:ns12="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns12:person" type="ns13:Person" xmlns:ns13="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="listAllProfessors" qname="ns12:listAllProfessors" returnQName="ns12:listAllProfessorsReturn" returnType="ns13:Person" soapAction="" xmlns:ns12="http://service.univserver.cmpe273.edu" xmlns:ns13="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="listAllPersons" qname="ns14:listAllPersons" returnQName="ns14:listAllPersonsReturn" returnType="ns15:Person" soapAction="" xmlns:ns14="http://service.univserver.cmpe273.edu" xmlns:ns15="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="listAllStudents" qname="ns16:listAllStudents" returnQName="ns16:listAllStudentsReturn" returnType="ns17:Person" soapAction="" xmlns:ns16="http://service.univserver.cmpe273.edu" xmlns:ns17="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="adminEditCourse" qname="ns18:adminEditCourse" returnQName="ns18:adminEditCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns18="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns18:course" type="ns19:Course" xmlns:ns19="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
-  <ns1:operation name="viewRegisteredCourse" qname="ns14:viewRegisteredCourse" returnQName="ns14:viewRegisteredCourseReturn" returnType="ns15:StudentCourse" soapAction="" xmlns:ns14="http://service.univserver.cmpe273.edu" xmlns:ns15="http://beans.univserver.cmpe273.edu">
-   <ns1:parameter qname="ns14:sjsuid" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  </ns1:operation>
-  <ns1:operation name="editProfessorInformation" qname="ns16:editProfessorInformation" returnQName="ns16:editProfessorInformationReturn" returnType="xsd:string" soapAction="" xmlns:ns16="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns16:person" type="ns17:Person" xmlns:ns17="http://beans.univserver.cmpe273.edu"/>
-  </ns1:operation>
-  <ns1:operation name="addCourseToCart" qname="ns18:addCourseToCart" returnQName="ns18:addCourseToCartReturn" returnType="xsd:string" soapAction="" xmlns:ns18="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns18:studentCourse" type="ns19:StudentCourse" xmlns:ns19="http://beans.univserver.cmpe273.edu"/>
-  </ns1:operation>
-  <ns1:operation name="removeCourseFromCart" qname="ns20:removeCourseFromCart" returnQName="ns20:removeCourseFromCartReturn" returnType="xsd:string" soapAction="" xmlns:ns20="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns20:studentCourse" type="ns21:StudentCourse" xmlns:ns21="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="adminDeleteCourse" qname="ns20:adminDeleteCourse" returnQName="ns20:adminDeleteCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns20="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns20:course" type="ns21:Course" xmlns:ns21="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
   <ns1:operation name="adminAddCourse" qname="ns22:adminAddCourse" returnQName="ns22:adminAddCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns22="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns22:course" type="ns23:Course" xmlns:ns23="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
-  <ns1:operation name="adminDeleteCourse" qname="ns24:adminDeleteCourse" returnQName="ns24:adminDeleteCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns24="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns24:course" type="ns25:Course" xmlns:ns25="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="removeCourseFromCart" qname="ns24:removeCourseFromCart" returnQName="ns24:removeCourseFromCartReturn" returnType="xsd:string" soapAction="" xmlns:ns24="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns24:studentCourse" type="ns25:StudentCourse" xmlns:ns25="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
-  <ns1:operation name="adminEditCourse" qname="ns26:adminEditCourse" returnQName="ns26:adminEditCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns26="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns26:course" type="ns27:Course" xmlns:ns27="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="addCourseToCart" qname="ns26:addCourseToCart" returnQName="ns26:addCourseToCartReturn" returnType="xsd:string" soapAction="" xmlns:ns26="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns26:studentCourse" type="ns27:StudentCourse" xmlns:ns27="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
-  <ns1:operation name="listAllStudents" qname="ns28:listAllStudents" returnQName="ns28:listAllStudentsReturn" returnType="ns29:Person" soapAction="" xmlns:ns28="http://service.univserver.cmpe273.edu" xmlns:ns29="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="viewRegisteredCourse" qname="ns28:viewRegisteredCourse" returnQName="ns28:viewRegisteredCourseReturn" returnType="ns29:StudentCourse" soapAction="" xmlns:ns28="http://service.univserver.cmpe273.edu" xmlns:ns29="http://beans.univserver.cmpe273.edu">
+   <ns1:parameter qname="ns28:sjsuid" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
   <ns1:operation name="searchAllCourses" qname="ns30:searchAllCourses" returnQName="ns30:searchAllCoursesReturn" returnType="ns31:Course" soapAction="" xmlns:ns30="http://service.univserver.cmpe273.edu" xmlns:ns31="http://beans.univserver.cmpe273.edu">
    <ns1:parameter qname="ns30:category" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
    <ns1:parameter qname="ns30:input" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="searchInstructorInformation" qname="ns32:searchInstructorInformation" returnQName="ns32:searchInstructorInformationReturn" returnType="ns33:Person" soapAction="" xmlns:ns32="http://service.univserver.cmpe273.edu" xmlns:ns33="http://beans.univserver.cmpe273.edu">
+  <ns1:operation name="searchStudentInformation" qname="ns32:searchStudentInformation" returnQName="ns32:searchStudentInformationReturn" returnType="ns33:Person" soapAction="" xmlns:ns32="http://service.univserver.cmpe273.edu" xmlns:ns33="http://beans.univserver.cmpe273.edu">
    <ns1:parameter qname="ns32:input" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="getCourseDetails" qname="ns34:getCourseDetails" returnQName="ns34:getCourseDetailsReturn" returnType="ns35:Course" soapAction="" xmlns:ns34="http://service.univserver.cmpe273.edu" xmlns:ns35="http://beans.univserver.cmpe273.edu">
-   <ns1:parameter qname="ns34:course" type="ns35:Course"/>
+  <ns1:operation name="searchInstructorInformation" qname="ns34:searchInstructorInformation" returnQName="ns34:searchInstructorInformationReturn" returnType="ns35:Person" soapAction="" xmlns:ns34="http://service.univserver.cmpe273.edu" xmlns:ns35="http://beans.univserver.cmpe273.edu">
+   <ns1:parameter qname="ns34:input" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="addCourseInBatch" qname="ns36:addCourseInBatch" returnQName="ns36:addCourseInBatchReturn" returnType="xsd:int" soapAction="" xmlns:ns36="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns36:co" type="ns37:Course" xmlns:ns37="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="viewAssignedCourses" qname="ns36:viewAssignedCourses" returnQName="ns36:viewAssignedCoursesReturn" returnType="ns37:InstructorCourse" soapAction="" xmlns:ns36="http://service.univserver.cmpe273.edu" xmlns:ns37="http://beans.univserver.cmpe273.edu">
+   <ns1:parameter qname="ns36:sjsuid" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="viewAssignedCourses" qname="ns38:viewAssignedCourses" returnQName="ns38:viewAssignedCoursesReturn" returnType="ns39:InstructorCourse" soapAction="" xmlns:ns38="http://service.univserver.cmpe273.edu" xmlns:ns39="http://beans.univserver.cmpe273.edu">
+  <ns1:operation name="getCourseInvoice" qname="ns38:getCourseInvoice" returnQName="ns38:getCourseInvoiceReturn" returnType="ns39:StudentCourse" soapAction="" xmlns:ns38="http://service.univserver.cmpe273.edu" xmlns:ns39="http://beans.univserver.cmpe273.edu">
    <ns1:parameter qname="ns38:sjsuid" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="getCourseInvoice" qname="ns40:getCourseInvoice" returnQName="ns40:getCourseInvoiceReturn" returnType="ns41:StudentCourse" soapAction="" xmlns:ns40="http://service.univserver.cmpe273.edu" xmlns:ns41="http://beans.univserver.cmpe273.edu">
-   <ns1:parameter qname="ns40:sjsuid" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getCourseDetails" qname="ns40:getCourseDetails" returnQName="ns40:getCourseDetailsReturn" returnType="ns41:Course" soapAction="" xmlns:ns40="http://service.univserver.cmpe273.edu" xmlns:ns41="http://beans.univserver.cmpe273.edu">
+   <ns1:parameter qname="ns40:course" type="ns41:Course"/>
   </ns1:operation>
-  <ns1:operation name="searchStudentInformation" qname="ns42:searchStudentInformation" returnQName="ns42:searchStudentInformationReturn" returnType="ns43:Person" soapAction="" xmlns:ns42="http://service.univserver.cmpe273.edu" xmlns:ns43="http://beans.univserver.cmpe273.edu">
-   <ns1:parameter qname="ns42:input" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="addCourseInBatch" qname="ns42:addCourseInBatch" returnQName="ns42:addCourseInBatchReturn" returnType="xsd:int" soapAction="" xmlns:ns42="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns42:co" type="ns43:Course" xmlns:ns43="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
-  <ns1:operation name="adminSignIn" qname="ns44:adminSignIn" returnQName="ns44:adminSignInReturn" returnType="xsd:boolean" soapAction="" xmlns:ns44="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns44:username" type="xsd:string"/>
-   <ns1:parameter qname="ns44:password" type="xsd:string"/>
+  <ns1:operation name="getAssignedCourse" qname="ns44:getAssignedCourse" returnQName="ns44:getAssignedCourseReturn" returnType="ns45:InstructorCourse" soapAction="" xmlns:ns44="http://service.univserver.cmpe273.edu" xmlns:ns45="http://beans.univserver.cmpe273.edu">
+   <ns1:parameter qname="ns44:ic" type="ns45:InstructorCourse"/>
   </ns1:operation>
-  <ns1:operation name="dropCourse" qname="ns45:dropCourse" returnQName="ns45:dropCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns45="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns45:sjsu_id" type="xsd:string"/>
-   <ns1:parameter qname="ns45:name" type="xsd:string"/>
-   <ns1:parameter qname="ns45:section" type="xsd:string"/>
+  <ns1:operation name="dropCourse" qname="ns46:dropCourse" returnQName="ns46:dropCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns46="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns46:sjsu_id" type="xsd:string"/>
+   <ns1:parameter qname="ns46:name" type="xsd:string"/>
+   <ns1:parameter qname="ns46:section" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="registerUser" qname="ns46:registerUser" returnQName="ns46:registerUserReturn" returnType="xsd:string" soapAction="" xmlns:ns46="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns46:person" type="ns47:Person" xmlns:ns47="http://beans.univserver.cmpe273.edu"/>
+  <ns1:operation name="signIn" qname="ns47:signIn" returnQName="ns47:signInReturn" returnType="ns48:Person" soapAction="" xmlns:ns47="http://service.univserver.cmpe273.edu" xmlns:ns48="http://beans.univserver.cmpe273.edu">
+   <ns1:parameter qname="ns47:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns47:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="signIn" qname="ns48:signIn" returnQName="ns48:signInReturn" returnType="ns49:Person" soapAction="" xmlns:ns48="http://service.univserver.cmpe273.edu" xmlns:ns49="http://beans.univserver.cmpe273.edu">
-   <ns1:parameter qname="ns48:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns48:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="addCourse" qname="ns49:addCourse" returnQName="ns49:addCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns49="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns49:sjsuid" type="xsd:string"/>
+   <ns1:parameter qname="ns49:courseNumber" type="xsd:string"/>
+   <ns1:parameter qname="ns49:courseName" type="xsd:string"/>
+   <ns1:parameter qname="ns49:section" type="xsd:string"/>
+   <ns1:parameter qname="ns49:day" type="xsd:string"/>
+   <ns1:parameter qname="ns49:time" type="xsd:string"/>
+   <ns1:parameter qname="ns49:location" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="addCourse" qname="ns50:addCourse" returnQName="ns50:addCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns50="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns50:sjsuid" type="xsd:string"/>
-   <ns1:parameter qname="ns50:courseNumber" type="xsd:string"/>
-   <ns1:parameter qname="ns50:courseName" type="xsd:string"/>
-   <ns1:parameter qname="ns50:section" type="xsd:string"/>
-   <ns1:parameter qname="ns50:day" type="xsd:string"/>
-   <ns1:parameter qname="ns50:time" type="xsd:string"/>
-   <ns1:parameter qname="ns50:location" type="xsd:string"/>
+  <ns1:operation name="registerUser" qname="ns50:registerUser" returnQName="ns50:registerUserReturn" returnType="xsd:string" soapAction="" xmlns:ns50="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns50:person" type="ns51:Person" xmlns:ns51="http://beans.univserver.cmpe273.edu"/>
   </ns1:operation>
-  <ns1:operation name="editCourseAssignedToAProfessor" qname="ns51:editCourseAssignedToAProfessor" returnQName="ns51:editCourseAssignedToAProfessorReturn" returnType="xsd:string" soapAction="" xmlns:ns51="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:parameter name="allowedMethods" value="viewRegisteredCourse deleteStudentInformation editCourseAssignedToAProfessor getCourseDetails getCourseInvoice testService adminDeleteCourse assignCourseToAProfessor viewAssignedCourses editStudentInformation listAllStudents listAllPersons adminSignIn addCourseInBatch registerUser deleteProfessorInformation searchInstructorInformation editProfessorInformation addCourse adminAddCourse listAllProfessors addCourseToCart adminEditCourse searchStudentInformation removeCourseFromCart signIn searchAllCourses dropCourse"/>
+  <ns1:operation name="adminSignIn" qname="ns52:adminSignIn" returnQName="ns52:adminSignInReturn" returnType="xsd:boolean" soapAction="" xmlns:ns52="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns52:username" type="xsd:string"/>
+   <ns1:parameter qname="ns52:password" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="editCourseAssignedToAProfessor" qname="ns53:editCourseAssignedToAProfessor" returnQName="ns53:editCourseAssignedToAProfessorReturn" returnType="xsd:string" soapAction="" xmlns:ns53="http://service.univserver.cmpe273.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns53:ic" type="ns54:InstructorCourse" xmlns:ns54="http://beans.univserver.cmpe273.edu"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="deleteStudentInformation viewRegisteredCourse editCourseAssignedToAProfessor getCourseDetails getCourseInvoice testService adminDeleteCourse assignCourseToAProfessor viewAssignedCourses editStudentInformation listAllStudents listAllPersons adminSignIn registerUser addCourseInBatch deleteProfessorInformation searchInstructorInformation editProfessorInformation addCourse adminAddCourse listAllProfessors addCourseToCart adminEditCourse searchStudentInformation removeCourseFromCart signIn searchAllCourses getAssignedCourse dropCourse"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="UniversityServerService"/>
   <ns1:parameter name="className" value="edu.cmpe273.univserver.service.UniversityServerService"/>
@@ -116,10 +121,10 @@
   <ns1:parameter name="schemaQualified" value="http://beans.univserver.cmpe273.edu,http://service.univserver.cmpe273.edu"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://service.univserver.cmpe273.edu"/>
   <ns1:parameter name="wsdlServiceElement" value="UniversityServerServiceService"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns52:Course" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.cmpe273.univserver.beans.Course" xmlns:ns52="http://beans.univserver.cmpe273.edu"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns53:InstructorCourse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.cmpe273.univserver.beans.InstructorCourse" xmlns:ns53="http://beans.univserver.cmpe273.edu"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns54:StudentCourse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.cmpe273.univserver.beans.StudentCourse" xmlns:ns54="http://beans.univserver.cmpe273.edu"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns55:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.cmpe273.univserver.beans.Person" xmlns:ns55="http://beans.univserver.cmpe273.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns55:Course" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.cmpe273.univserver.beans.Course" xmlns:ns55="http://beans.univserver.cmpe273.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns56:InstructorCourse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.cmpe273.univserver.beans.InstructorCourse" xmlns:ns56="http://beans.univserver.cmpe273.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns57:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.cmpe273.univserver.beans.Person" xmlns:ns57="http://beans.univserver.cmpe273.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns58:StudentCourse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.cmpe273.univserver.beans.StudentCourse" xmlns:ns58="http://beans.univserver.cmpe273.edu"/>
  </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>

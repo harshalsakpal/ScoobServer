@@ -19,10 +19,10 @@ public class SearchCourseDAO {
 		try {
 			db = new DatabaseConnection();
 			conn = db.getConnection();
-			String queryTemp = "SELECT C.COURSE_NO, C.COURSE_NAME, C.SECTION_NO, C.CREDITS, IC.DAY, "
+			String queryTemp = "SELECT C.COURSE_NO, C.COURSE_NAME, C.SECTION_NO, C.CREDITS, IC.DAY,"
 					+ "IC.LOCATION, IC.TIME, C.DEPARTMENT FROM INSTRUCTOR_COURSE IC, COURSES C "
 					+ "WHERE IC.COURSE_NO = C.COURSE_NO AND C.SECTION_NO = IC.SECTION AND "
-					+ "C.COURSE_NO= ? AND C.DEPARTMENT = ? ";
+					+ "C.COURSE_NO= ? AND C.DEPARTMENT = ?";
 
 			PreparedStatement pstmt = conn.prepareStatement(queryTemp);
 

@@ -135,10 +135,11 @@ public class UniversityServerService {
 		return icd.AssignCourse(ic);
 	}
 
-	public String editCourseAssignedToAProfessor() {
-
-		return "";
-	}
+	public String editCourseAssignedToAProfessor(InstructorCourse ic) {
+		InstructorCourseDAO icd = new InstructorCourseDAO();
+		
+		return icd.UpdateAssignCourse(ic);
+		}
 
 	public String editStudentInformation(Person person) {
 
@@ -206,5 +207,12 @@ public class UniversityServerService {
 		CourseDAO c = new CourseDAO();
 		return c.addCourseinBatch(co);
 	}
-
+	
+	public InstructorCourse getAssignedCourse(InstructorCourse ic)
+	{
+		InstructorCourseDAO icd = new InstructorCourseDAO();
+		InstructorCourse newic=icd.getAssignedCourseDetails(ic);
+		return newic;
+	}
+	
 }
