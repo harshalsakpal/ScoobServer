@@ -9,12 +9,13 @@ import edu.cmpe273.univserver.beans.Course;
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class SearchCourseDAO {
-	static public  Course[] searchcourses(String department, String courseNumber)
+	static public Course[] searchcourses(String department, String courseNumber)
 			throws SQLException {
 		Course[] course = null;
 		DatabaseConnection db = null;
 		Connection conn = null;
-		System.out.println("Department and courseNumber in DAO >> "+department+"  "+courseNumber);
+		System.out.println("Department and courseNumber in DAO >> "
+				+ department + "  " + courseNumber);
 
 		try {
 			db = new DatabaseConnection();
@@ -33,13 +34,14 @@ public class SearchCourseDAO {
 			int numberOfRows = 0, iCount = 0;
 			while (rs.next()) {
 				numberOfRows++;
-			}System.out.println("Number of rows>> "+numberOfRows);
+			}
+			System.out.println("Number of rows>> " + numberOfRows);
 			course = new Course[numberOfRows];
 			rs.beforeFirst();
 
 			while (rs.next()) {
 				Course c = new Course();
-				System.out.println(rs.getString("COURSE_NO"));	
+				System.out.println(rs.getString("COURSE_NO"));
 				c.setCourseNumber(rs.getString("COURSE_NO"));
 				c.setCourseName(rs.getString("COURSE_NAME"));
 				c.setSection(rs.getString("SECTION_NO"));
@@ -48,6 +50,50 @@ public class SearchCourseDAO {
 				c.setDay(rs.getString("DAY"));
 				c.setTime(rs.getString("TIME"));
 				c.setLocation(rs.getString("LOCATION"));
+
+				course[iCount] = c;
+				iCount++;
+			}
+		} catch (Exception sqle) {
+			sqle.printStackTrace();
+		} finally {
+			db.closeConnection(conn);
+		}
+		return course;
+
+	}
+
+	public Course[] getAllCourses() {
+
+		Course[] course = null;
+		DatabaseConnection db = null;
+		Connection conn = null;
+
+		try {
+			db = new DatabaseConnection();
+			conn = db.getConnection();
+			String queryTemp = "SELECT * FROM COURSES ";
+
+			PreparedStatement pstmt = conn.prepareStatement(queryTemp);
+
+			ResultSet rs = pstmt.executeQuery();
+			int numberOfRows = 0, iCount = 0;
+			while (rs.next()) {
+				numberOfRows++;
+			}
+			System.out.println("Number of rows>> " + numberOfRows);
+			course = new Course[numberOfRows];
+			rs.beforeFirst();
+
+			while (rs.next()) {
+				Course c = new Course();
+				System.out.println(rs.getString("COURSE_NO"));
+				c.setCourseNumber(rs.getString("COURSE_NO"));
+				c.setCourseName(rs.getString("COURSE_NAME"));
+				c.setSection(rs.getString("SECTION_NO"));
+				c.setCredits(rs.getString("CREDITS"));
+				c.setDepartment(rs.getString("DEPARTMENT"));
+				c.setCourseDesc(rs.getString("COURSE_DESC"));
 
 				course[iCount] = c;
 				iCount++;
