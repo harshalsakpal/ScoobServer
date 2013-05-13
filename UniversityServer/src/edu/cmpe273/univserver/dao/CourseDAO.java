@@ -201,7 +201,7 @@ public class CourseDAO {
 			
 		
 		try {
-			String sql = "Select * from Courses where department='" + Dept
+			String sql = "Select Course_No,Course_Name,Course_Desc,Section_No,Credits,Department from Courses where department='" + Dept
 					+ "' and course_no='" + course_number + "' and section_no='"
 					+ section + "'";
 
