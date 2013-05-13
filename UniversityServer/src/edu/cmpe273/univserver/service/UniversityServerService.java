@@ -214,9 +214,18 @@ public class UniversityServerService {
 		InstructorCourse newic=icd.getAssignedCourseDetails(ic);
 		return newic;
 	}
+
 	public Person[] getAllStudentsUnderACourse(Course c)
 	{	SearchCourseDAO sd = new SearchCourseDAO();
 		return sd.listStudentsUnderCourse(c);
 	}
 	
+
+	public Course[] getAllCourses(){
+		
+		SearchCourseDAO dao = new SearchCourseDAO();
+		Course[]  courses = dao.getAllCourses();
+		return courses;
+	}
+
 }

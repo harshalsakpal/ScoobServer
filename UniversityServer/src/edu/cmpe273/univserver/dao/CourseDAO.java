@@ -103,7 +103,7 @@ public class CourseDAO {
 
 		} catch (Exception e) {
 
-			// e.printStackTrace();
+			 e.printStackTrace();
 			return "Course Adding Failure:Duplicate Entry";
 		} finally {
 			db.closeConnection(conn);
