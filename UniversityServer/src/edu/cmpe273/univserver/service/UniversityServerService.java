@@ -55,17 +55,20 @@ public class UniversityServerService {
 		return pd.AdminSignIn(username, password);
 	}
 
-	public String addCourse(String sjsuid, String courseNumber, String courseName, String section, String day, String time, String location) {
+	public String addCourse(String sjsuid, String courseNumber,
+			String courseName, String section, String day, String time,
+			String location) {
 		CourseDAO courseDAO = new CourseDAO();
-		String addCourseReply = courseDAO.Addcourse(sjsuid, courseNumber,courseName,section,day,time,location);
-		System.out.println("addCourseReply in service>>> "+addCourseReply);
+		String addCourseReply = courseDAO.Addcourse(sjsuid, courseNumber,
+				courseName, section, day, time, location);
+		System.out.println("addCourseReply in service>>> " + addCourseReply);
 		return addCourseReply;
 	}
 
-	public String dropCourse(String sjsu_id, String name,String section) {
-		Student_drop sd= new Student_drop();
-		String del = sd.dropCourse(sjsu_id, name,section);
-		System.out.println("dropCourse in service>>> "+del);
+	public String dropCourse(String sjsu_id, String name, String section) {
+		Student_drop sd = new Student_drop();
+		String del = sd.dropCourse(sjsu_id, name, section);
+		System.out.println("dropCourse in service>>> " + del);
 		return del;
 
 	}
@@ -137,9 +140,9 @@ public class UniversityServerService {
 
 	public String editCourseAssignedToAProfessor(InstructorCourse ic) {
 		InstructorCourseDAO icd = new InstructorCourseDAO();
-		
+
 		return icd.UpdateAssignCourse(ic);
-		}
+	}
 
 	public String editStudentInformation(Person person) {
 
@@ -207,24 +210,22 @@ public class UniversityServerService {
 		CourseDAO c = new CourseDAO();
 		return c.addCourseinBatch(co);
 	}
-	
-	public InstructorCourse getAssignedCourse(InstructorCourse ic)
-	{
+
+	public InstructorCourse getAssignedCourse(InstructorCourse ic) {
 		InstructorCourseDAO icd = new InstructorCourseDAO();
-		InstructorCourse newic=icd.getAssignedCourseDetails(ic);
+		InstructorCourse newic = icd.getAssignedCourseDetails(ic);
 		return newic;
 	}
 
-	public Person[] getAllStudentsUnderACourse(Course c)
-	{	SearchCourseDAO sd = new SearchCourseDAO();
+	public Person[] getAllStudentsUnderACourse(Course c) {
+		SearchCourseDAO sd = new SearchCourseDAO();
 		return sd.listStudentsUnderCourse(c);
 	}
-	
 
-	public Course[] getAllCourses(){
-		
+	public Course[] getAllCourses() {
+
 		SearchCourseDAO dao = new SearchCourseDAO();
-		Course[]  courses = dao.getAllCourses();
+		Course[] courses = dao.getAllCourses();
 		return courses;
 	}
 
