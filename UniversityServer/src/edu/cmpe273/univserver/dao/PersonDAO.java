@@ -16,9 +16,6 @@ import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class PersonDAO {
 
-	
-	
-
 	private static final int CACHESIZE = 75;
 	static int Personhits = 0;
 	static int PersonMiss = 0;
@@ -151,7 +148,7 @@ public class PersonDAO {
 
 			while (rs.next()) {
 				Person person = new Person();
-				person.setSjsuid(Integer.toString((rs.getInt("SJSU_ID"))));
+				person.setSjsuid(Integer.toString((rs.getInt("SJSUID"))));
 				person.setFirstName(rs.getString("FIRST_NAME"));
 				person.setLastName(rs.getString("LAST_NAME"));
 				person.setAddrLine1(rs.getString("ADDR_LINE_1"));
