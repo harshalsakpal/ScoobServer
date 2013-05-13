@@ -406,6 +406,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="getAllStudentsUnderACourse">
+    <complexType>
+     <sequence>
+      <element name="c" type="tns1:Course"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllStudentsUnderACourseResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllStudentsUnderACourseReturn" type="tns1:Person"/>
+     </sequence>
+    </complexType>
+   </element>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://beans.univserver.cmpe273.edu" xmlns="http://www.w3.org/2001/XMLSchema">
    <complexType name="Person">
@@ -723,6 +737,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getAllStudentsUnderACourseResponse">
+
+      <wsdl:part element="impl:getAllStudentsUnderACourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="getCourseDetailsRequest">
 
       <wsdl:part element="impl:getCourseDetails" name="parameters">
@@ -734,6 +756,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="getCourseInvoiceRequest">
 
       <wsdl:part element="impl:getCourseInvoice" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllStudentsUnderACourseRequest">
+
+      <wsdl:part element="impl:getAllStudentsUnderACourse" name="parameters">
 
       </wsdl:part>
 
@@ -1281,6 +1311,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getAllStudentsUnderACourse">
+
+         <wsdl:input message="impl:getAllStudentsUnderACourseRequest" name="getAllStudentsUnderACourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllStudentsUnderACourseResponse" name="getAllStudentsUnderACourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="UniversityServerServiceSoapBinding" type="impl:UniversityServerService">
@@ -1802,6 +1844,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="editCourseAssignedToAProfessorResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllStudentsUnderACourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllStudentsUnderACourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllStudentsUnderACourseResponse">
 
             <wsdlsoap:body use="literal"/>
 

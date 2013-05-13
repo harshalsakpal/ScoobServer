@@ -114,7 +114,10 @@
       <operation name="editCourseAssignedToAProfessor" qname="operNS:editCourseAssignedToAProfessor" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:editCourseAssignedToAProfessorReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:ic" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:InstructorCourse" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
       </operation>
-      <parameter name="allowedMethods" value="deleteStudentInformation viewRegisteredCourse editCourseAssignedToAProfessor getCourseDetails getCourseInvoice testService adminDeleteCourse assignCourseToAProfessor viewAssignedCourses editStudentInformation listAllStudents listAllPersons adminSignIn registerUser addCourseInBatch deleteProfessorInformation searchInstructorInformation editProfessorInformation addCourse adminAddCourse listAllProfessors addCourseToCart adminEditCourse searchStudentInformation removeCourseFromCart signIn searchAllCourses getAssignedCourse dropCourse"/>
+      <operation name="getAllStudentsUnderACourse" qname="operNS:getAllStudentsUnderACourse" xmlns:operNS="http://service.univserver.cmpe273.edu" returnQName="retNS:getAllStudentsUnderACourseReturn" xmlns:retNS="http://service.univserver.cmpe273.edu" returnType="rtns:Person" xmlns:rtns="http://beans.univserver.cmpe273.edu" soapAction="" >
+        <parameter qname="pns:c" xmlns:pns="http://service.univserver.cmpe273.edu" type="tns:Course" xmlns:tns="http://beans.univserver.cmpe273.edu"/>
+      </operation>
+      <parameter name="allowedMethods" value="deleteStudentInformation viewRegisteredCourse editCourseAssignedToAProfessor getCourseDetails getCourseInvoice testService adminDeleteCourse assignCourseToAProfessor getAllStudentsUnderACourse viewAssignedCourses editStudentInformation listAllStudents listAllPersons adminSignIn registerUser addCourseInBatch deleteProfessorInformation searchInstructorInformation editProfessorInformation addCourse adminAddCourse listAllProfessors addCourseToCart adminEditCourse searchStudentInformation removeCourseFromCart signIn searchAllCourses getAssignedCourse dropCourse"/>
 
       <typeMapping
         xmlns:ns="http://beans.univserver.cmpe273.edu"

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import edu.cmpe273.univserver.beans.Course;
+import edu.cmpe273.univserver.beans.Person;
 import edu.cmpe273.univserver.connection.DatabaseConnection;
 
 public class SearchCourseDAO {
@@ -60,5 +61,50 @@ public class SearchCourseDAO {
 		return course;
 
 	}
+
+	 public  Person[] listStudentsUnderCourse( Course c)
+			 {
+		
+		DatabaseConnection db = null;
+		Connection conn = null;
+		Person[] p = null;
+
+		try {
+			db = new DatabaseConnection();
+			conn = db.getConnection();
+			String queryTemp = "Select p.sjsuid,p.first_name,p.last_name,p.email_id from Person p,instructor_course ic where p.sjsuid=ic.sjsu_id and ic.course_no='"+c.getCourseNumber()+"' and ic.section='"+c.getSection()+"' and ic.department='"+c.getDepartment()+"'";
+
+			PreparedStatement pstmt = conn.prepareStatement(queryTemp);
+
+			
+
+			ResultSet rs = pstmt.executeQuery();
+			int numberOfRows = 0, iCount = 0;
+			
+			while (rs.next()) {
+				numberOfRows++;
+			}
+			
+			p = new Person[numberOfRows];
+			rs.beforeFirst();
+
+			while (rs.next()) {
+				Person pp = new Person();
+				pp.setSjsuid(rs.getString(1));	
+				pp.setFirstName(rs.getString(2));
+				pp.setLastName(rs.getString(3));
+				pp.setEmailid(rs.getString(4));
+				p[iCount] = pp;
+				iCount++;
+			}
+		} catch (Exception sqle) {
+			sqle.printStackTrace();
+		} finally {
+			db.closeConnection(conn);
+		}
+		return p;
+
+	}
+
 
 }
